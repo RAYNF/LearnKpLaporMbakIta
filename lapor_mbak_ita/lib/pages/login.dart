@@ -13,7 +13,7 @@ class LoginPage extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: defaultMargin),
           children: [
-            Image.asset('assets/Logo.png', height: 300, fit: BoxFit.fill),
+            Image.asset('assets/logosplash.png', height: 210, width: 210,),
             const SizedBox(height: 51,),
             Text("Welcome", style: primaryTextStyle, textAlign: TextAlign.center,),
             const SizedBox(height: 51,),
@@ -22,8 +22,8 @@ class LoginPage extends StatelessWidget {
               child: ElevatedButton(onPressed: (){},
               style: ElevatedButton.styleFrom(backgroundColor: primaryColor, shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15)
-              )), child: Text('Login', style: primaryTextStyle.copyWith(
-                fontSize: 16, fontWeight: FontWeight.w500, color: secondaryColor)))
+              )), child: Text('Register', style: primaryTextStyle.copyWith(
+                fontSize: 16, fontWeight: FontWeight.w500, color: primaryColor)))
             ),
             const SizedBox(height: 15,),
             SizedBox(
@@ -70,6 +70,99 @@ class LoginPage extends StatelessWidget {
                                       ) 
                                       
                                     ],),
+                                    SizedBox(
+                                      height: 25,
+                                    ),
+                                    TextField(decoration: InputDecoration(
+                                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                                      hintText: "Nama Lengkap",
+                                      suffixIcon: InkWell(onTap: () {
+                                        
+                                      }, child: Icon(Icons.person_outline),)),),
+                                      SizedBox(
+                                      height: 20,
+                                    ),
+                                    TextField(decoration: InputDecoration(
+                                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                                      hintText: "Jenis Kelamin",
+                                      suffixIcon: InkWell(onTap: () {
+                                        
+                                      }, child: Icon(Icons.visibility_outlined),)),),
+                                      SizedBox(
+                                      height: 20,
+                                    ),
+                                    TextField(decoration: InputDecoration(
+                                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                                      hintText: "Email",
+                                      suffixIcon: InkWell(onTap: () {
+                                        
+                                      }, child: Icon(Icons.mail_outline),)),),
+                                      SizedBox(
+                                      height: 20,
+                                    ),
+                                    TextField(decoration: InputDecoration(
+                                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                                      hintText: "No. handphone",
+                                      suffixIcon: InkWell(onTap: () {
+                                        
+                                      }, child: Icon(Icons.phone_android_outlined),)),),
+                                      SizedBox(
+                                      height: 20,
+                                    ),
+                                    TextField(decoration: InputDecoration(
+                                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                                      hintText: "Kata Sandi",
+                                      suffixIcon: InkWell(onTap: () {
+                                        
+                                      }, child: Icon(Icons.lock_outlined),)),),
+                                      SizedBox(
+                                      height: 20,
+                                    ),
+                                    TextField(decoration: InputDecoration(
+                                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                                      hintText: "Konfirmasi Kata Sandi",
+                                      suffixIcon: InkWell(onTap: () {
+                                        
+                                      }, child: Icon(Icons.lock_outlined),)),),
+                                      SizedBox(
+                                        height: 21,
+                                      ),
+                                      Container(
+                                        height: 60,
+                                        width: MediaQuery.of(context).size.width - 2 * defaultMargin,
+                                        child: ElevatedButton(
+                                          onPressed: (){},
+                                          child: Text('Daftar', style: primaryTextStyle.copyWith(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500,
+                                            color: primaryColor),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: primaryColor,
+                                            shape: RoundedRectangleBorder(
+                                            
+                                              borderRadius: BorderRadius.circular(15)
+                                            )
+                                          ),),
+                                        ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Text("Belum Mempunyai Akun?", style: primaryTextStyle.copyWith(
+                                            color: darkColor, fontSize: 18
+                                          ),),
+                                          Text("Daftar", style: primaryTextStyle.copyWith(
+                                            color: mutedColor, fontSize: 18
+                                          ),)
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: defaultMargin,
+                                      ),
                                   ],
                                 ),
                               ),
@@ -82,7 +175,7 @@ class LoginPage extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(backgroundColor: primaryColor, shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15)
-              )), child: Text('Register', style: primaryTextStyle.copyWith(
+              )), child: Text('Login', style: primaryTextStyle.copyWith(
                 fontSize: 16, fontWeight: FontWeight.w500, color: secondaryColor)),)
             )
           ]
