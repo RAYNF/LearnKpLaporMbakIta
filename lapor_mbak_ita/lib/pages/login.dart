@@ -14,10 +14,10 @@ class LoginPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: defaultMargin),
           children: [
             Image.asset('assets/Logo.png', height: 300, fit: BoxFit.fill),
-            SizedBox(height: 51,),
+            const SizedBox(height: 51,),
             Text("Welcome", style: primaryTextStyle, textAlign: TextAlign.center,),
-            SizedBox(height: 51,),
-            Container(
+            const SizedBox(height: 51,),
+            SizedBox(
               height: 60, width: MediaQuery.of(context).size.width - 2 * defaultMargin,
               child: ElevatedButton(onPressed: (){},
               style: ElevatedButton.styleFrom(backgroundColor: primaryColor, shape: RoundedRectangleBorder(
@@ -25,8 +25,8 @@ class LoginPage extends StatelessWidget {
               )), child: Text('Login', style: primaryTextStyle.copyWith(
                 fontSize: 16, fontWeight: FontWeight.w500, color: secondaryColor)))
             ),
-            SizedBox(height: 15,),
-            Container(
+            const SizedBox(height: 15,),
+            SizedBox(
               height: 60, width: MediaQuery.of(context).size.width - 2 * defaultMargin,
               child: ElevatedButton(onPressed: (){
                 showModalBottomSheet(
@@ -41,7 +41,7 @@ class LoginPage extends StatelessWidget {
                               
                               decoration: BoxDecoration(
                                 color: secondaryColor,
-                                borderRadius: BorderRadius.only(topRight: Radius.circular(40),
+                                borderRadius: const BorderRadius.only(topRight: Radius.circular(40),
                                 topLeft: Radius.circular(40))
                               ),
                               child: Container(
@@ -49,7 +49,7 @@ class LoginPage extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(height: 25,),
+                                    const SizedBox(height: 25,),
                                     Row(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
@@ -59,7 +59,7 @@ class LoginPage extends StatelessWidget {
                                           Text("Register", style: primaryTextStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 30, color: secondaryColor),),
                                         ],
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       Center(
                                         child: InkWell(
                                           onTap: (){

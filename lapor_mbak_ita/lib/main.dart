@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         primaryColor: primaryColor,
         canvasColor: Colors.transparent,
       ),
-      home: LoginPage(),
+      home: const LoginPage(),
     );
   }
 }
