@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.cyan,
         primaryColor: primaryColor,
-        canvasColor: Colors.transparent,
+        canvasColor: primaryColor,
       ),
       home: const LoginPage(),
     );
