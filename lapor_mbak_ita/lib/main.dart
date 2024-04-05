@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lapor_mbak_ita/pages/beranda.dart';
 import 'package:lapor_mbak_ita/pages/loginPage.dart';
 import 'package:lapor_mbak_ita/pages/registerPage.dart';
 
@@ -13,7 +14,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Login(),
+      debugShowCheckedModeBanner: false,
+      home: Beranda(),
     );
   }
 }

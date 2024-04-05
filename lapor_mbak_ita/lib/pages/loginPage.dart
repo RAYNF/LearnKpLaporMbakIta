@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lapor_mbak_ita/pages/registerPage.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
 
@@ -99,7 +100,7 @@ class Login extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: darkColor
                           ),),
-                           SizedBox(height: 15,),
+                          SizedBox(height: 15,),
                           Container(
                             height: 60,
                             width: MediaQuery.of(context).size.width - 2 * defaultMargin,
@@ -135,11 +136,12 @@ class Login extends StatelessWidget {
                                 color: mutedColor
                               ),),
                               SizedBox(width: 10,),
-                              Text("Daftar", style: primaryTextStyle.copyWith(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: mutedColor
-                              ),),
+                              TextButton(
+                                style: TextButton.styleFrom(textStyle: 
+                                  TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: mutedColor)),
+                                onPressed: (){
+                                  Navigator.push(context,MaterialPageRoute(builder: ((context) => Register())));
+                            }, child: Text("Daftar"))
                             ],
                           )
                       ],
