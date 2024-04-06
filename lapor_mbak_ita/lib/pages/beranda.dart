@@ -20,8 +20,7 @@ class Beranda extends StatelessWidget {
           ),
         ]
       ),
-      body: SafeArea(
-        bottom: false,
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Row(
@@ -276,8 +275,116 @@ class Beranda extends StatelessWidget {
                     ),
                     SizedBox(height: 5,),
                     Row(
-                      
-                    )
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(width: 20,),
+                        Image.asset('assets/icon.png', height: 30, width: 30, color: darkColor,),
+                        SizedBox(width: 5,),
+                        Text("2", style: primaryTextStyle.copyWith(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: mutedColor,
+                        ),),
+                        SizedBox(width: 5,),
+                        Image.asset('assets/komen.png', height: 40, width: 40, color: darkColor,),
+                        SizedBox(width: 5,),
+                        Image.asset('assets/share.png', height: 30, width: 30,),
+                        SizedBox(width: 235,),
+                        Container(
+                            height: 30,
+                            width: 105,
+                            child: ElevatedButton(
+                              onPressed: (){},
+                              child: Text('Verifikasi', style: primaryTextStyle.copyWith(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: darkColor),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: verifikasiColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20))
+                              ),),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      color: mutedColor,
+                      thickness: 1,
+                    ),
+                    SizedBox(height: 5,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('assets/profil.png', height: 40, width: 40,),
+                        SizedBox(width: 20,),
+                        Text("Username", style: primaryTextStyle.copyWith(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500
+                        ),),
+                        SizedBox(width: 260,),
+                        Text("DD-MM-YYYY", style: primaryTextStyle.copyWith(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500
+                        ),)
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(15),
+                      child: Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.",
+                      textAlign: TextAlign.justify,),
+                    ),
+                    Container(
+                      width: 465,
+                      height: 220,
+                      decoration: BoxDecoration(
+                        color: mutedColor,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.asset('assets/laporan 2.jpeg', fit: BoxFit.cover,),
+                      ) 
+                    ),
+                    SizedBox(height: 5,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(width: 20,),
+                        Image.asset('assets/icon.png', height: 30, width: 30, color: darkColor,),
+                        SizedBox(width: 5,),
+                        Text("2", style: primaryTextStyle.copyWith(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: mutedColor,
+                        ),),
+                        SizedBox(width: 5,),
+                        Image.asset('assets/komen.png', height: 40, width: 40, color: darkColor,),
+                        SizedBox(width: 5,),
+                        Image.asset('assets/share.png', height: 30, width: 30,),
+                        SizedBox(width: 235,),
+                        Container(
+                            height: 30,
+                            width: 105,
+                            child: ElevatedButton(
+                              onPressed: (){},
+                              child: Text('Verifikasi', style: primaryTextStyle.copyWith(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: darkColor),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: verifikasiColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20))
+                              ),),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      color: mutedColor,
+                      thickness: 1,
+                    ),
                   ],
                 ),
               )
