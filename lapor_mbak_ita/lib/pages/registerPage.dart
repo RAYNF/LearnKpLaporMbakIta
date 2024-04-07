@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lapor_mbak_ita/pages/beranda.dart';
 import 'package:lapor_mbak_ita/pages/loginPage.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
@@ -132,7 +133,7 @@ class Register extends StatelessWidget {
                             width: MediaQuery.of(context).size.width - 2 * defaultMargin,
                             child: ElevatedButton(
                               onPressed: (){
-
+                                Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
                               },
                               child: Text('Daftar', style: primaryTextStyle.copyWith(
                                 fontSize: 16,

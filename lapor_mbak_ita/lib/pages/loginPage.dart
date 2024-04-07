@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lapor_mbak_ita/pages/beranda.dart';
 import 'package:lapor_mbak_ita/pages/registerPage.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
@@ -81,7 +82,9 @@ class Login extends StatelessWidget {
                             height: 60,
                             width: MediaQuery.of(context).size.width - 2 * defaultMargin,
                             child: ElevatedButton(
-                              onPressed: (){},
+                              onPressed: (){
+                                Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
+                              },
                               child: Text('Masuk', style: primaryTextStyle.copyWith(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
