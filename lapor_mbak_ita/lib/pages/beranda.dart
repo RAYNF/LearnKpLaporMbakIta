@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lapor_mbak_ita/pages/laporanDetail.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
 class Beranda extends StatelessWidget {
@@ -243,6 +244,10 @@ class Beranda extends StatelessWidget {
         body: Center(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context,MaterialPageRoute(builder: ((context) => Laporan())));
+              },
                 child: Column(
                   children: [
                     SizedBox(height: 10,),
@@ -393,6 +398,7 @@ class Beranda extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
             ),
           ),
       ),
@@ -412,19 +418,27 @@ class Beranda extends StatelessWidget {
         child: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: darkColor,),
+              icon: IconButton(icon: Icon(Icons.home), color: darkColor,onPressed: () {
+                Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
+              },),
               label: 'Laporan',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.newspaper, color: darkColor,),
+              icon: IconButton(icon: Icon(Icons.newspaper), color: darkColor,onPressed: () {
+                
+              },),
               label: 'Berita',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.call, color: darkColor,),
+              icon: IconButton(icon: Icon(Icons.call), color: darkColor,onPressed: () {
+               
+              },),
               label: 'Call Center',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person, color: darkColor,),
+              icon: IconButton(icon: Icon(Icons.person), color: darkColor,onPressed: () {
+                
+              },),
               label: 'Profile',
             ),
           ],

@@ -12,7 +12,7 @@ Color selesaiColor = Color(0xff5CB2F0);
 Color prosesColor = Color(0xff4EF201);
 
 TextStyle primaryTextStyle = GoogleFonts.poppins(
-  fontSize: 24, color: darkColor
+  fontSize: 24, color: darkColor,
 );
 
 FontWeight bold = FontWeight.bold;
