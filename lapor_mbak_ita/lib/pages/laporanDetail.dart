@@ -103,7 +103,7 @@ class Laporan extends StatelessWidget {
                 SizedBox(height: 30,),
                 Center(
                   child: Container(
-                    width: 465,
+                    width: MediaQuery.of(context).size.width - 2 * defaultMargin,
                     height: 220,
                     decoration: BoxDecoration(
                       color: mutedColor,

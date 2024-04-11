@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lapor_mbak_ita/pages/buatLaporan.dart';
 import 'package:lapor_mbak_ita/pages/laporanDetail.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
@@ -273,7 +274,7 @@ class Beranda extends StatelessWidget {
                       textAlign: TextAlign.justify,),
                     ),
                     Container(
-                      width: 465,
+                      width: MediaQuery.of(context).size.width - 2 * defaultMargin,
                       height: 220,
                       decoration: BoxDecoration(
                         color: mutedColor,
@@ -346,7 +347,7 @@ class Beranda extends StatelessWidget {
                       textAlign: TextAlign.justify,),
                     ),
                     Container(
-                      width: 465,
+                      width: MediaQuery.of(context).size.width - 2 * defaultMargin,
                       height: 220,
                       decoration: BoxDecoration(
                         color: mutedColor,
@@ -404,7 +405,7 @@ class Beranda extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-
+          Navigator.push(context, MaterialPageRoute(builder: ((context) => BuatLaporan())));
         }, child: Icon(Icons.add, color: secondaryColor,), 
         backgroundColor: primaryColor,
         shape: CircleBorder(),),

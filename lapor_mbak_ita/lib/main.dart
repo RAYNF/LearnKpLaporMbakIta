@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lapor_mbak_ita/pages/beranda.dart';
+import 'package:lapor_mbak_ita/pages/buatLaporan.dart';
 import 'package:lapor_mbak_ita/pages/laporanDetail.dart';
 import 'package:lapor_mbak_ita/pages/loginPage.dart';
 import 'package:lapor_mbak_ita/pages/registerPage.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         primaryColor: primaryColor,
         canvasColor: Colors.transparent,
       ),
-      home: Laporan(),
+      home: BuatLaporan(),
     );
   }
 }
