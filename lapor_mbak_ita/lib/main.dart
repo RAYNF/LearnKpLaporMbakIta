@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lapor_mbak_ita/pages/beranda.dart';
+import 'package:lapor_mbak_ita/pages/berita.dart';
+import 'package:lapor_mbak_ita/pages/beritaDetail.dart';
 import 'package:lapor_mbak_ita/pages/buatLaporan.dart';
+import 'package:lapor_mbak_ita/pages/callCenter.dart';
 import 'package:lapor_mbak_ita/pages/laporanDetail.dart';
 import 'package:lapor_mbak_ita/pages/loginPage.dart';
 import 'package:lapor_mbak_ita/pages/registerPage.dart';
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
         primaryColor: primaryColor,
         canvasColor: Colors.transparent,
       ),
-      home: BuatLaporan(),
+      home: CallCenter(),
     );
   }
 }

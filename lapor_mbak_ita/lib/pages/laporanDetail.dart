@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lapor_mbak_ita/pages/beranda.dart';
+import 'package:lapor_mbak_ita/pages/berita.dart';
+import 'package:lapor_mbak_ita/pages/callCenter.dart';
+import 'package:lapor_mbak_ita/pages/profilePage.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
 class Laporan extends StatelessWidget {
@@ -172,19 +175,19 @@ class Laporan extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.newspaper), color: darkColor,onPressed: () {
-                
+                Navigator.push(context,MaterialPageRoute(builder: ((context) => Berita())));
               },),
               label: 'Berita',
             ),
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.call), color: darkColor,onPressed: () {
-               
+                Navigator.push(context,MaterialPageRoute(builder: ((context) => CallCenter())));
               },),
               label: 'Call Center',
             ),
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.person), color: darkColor,onPressed: () {
-                
+                 Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
               },),
               label: 'Profile',
             ),

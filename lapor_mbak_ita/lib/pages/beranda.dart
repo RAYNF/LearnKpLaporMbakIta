@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lapor_mbak_ita/pages/berita.dart';
 import 'package:lapor_mbak_ita/pages/buatLaporan.dart';
+import 'package:lapor_mbak_ita/pages/callCenter.dart';
 import 'package:lapor_mbak_ita/pages/laporanDetail.dart';
+import 'package:lapor_mbak_ita/pages/profilePage.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
 class Beranda extends StatelessWidget {
@@ -420,25 +423,25 @@ class Beranda extends StatelessWidget {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.home), color: darkColor,onPressed: () {
-                Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
+                //Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
               },),
               label: 'Laporan',
             ),
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.newspaper), color: darkColor,onPressed: () {
-                
+                Navigator.push(context,MaterialPageRoute(builder: ((context) => Berita())));
               },),
               label: 'Berita',
             ),
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.call), color: darkColor,onPressed: () {
-               
+                Navigator.push(context,MaterialPageRoute(builder: ((context) => CallCenter())));
               },),
               label: 'Call Center',
             ),
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.person), color: darkColor,onPressed: () {
-                
+                 Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
               },),
               label: 'Profile',
             ),
