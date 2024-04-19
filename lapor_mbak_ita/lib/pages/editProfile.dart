@@ -16,11 +16,88 @@ class EditProfile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.only(left: 10, top: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.arrow_back),
+                      color: secondaryColor,
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Perubahan Belum Tersimpan', style: primaryTextStyle.copyWith(
+                                fontSize: 16,
+                                fontWeight: bold
+                              ),
+                              textAlign: TextAlign.center,),
+                              content: Text('Apakah Anda yakin ingin keluar?', style: primaryTextStyle.copyWith(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500
+                              ),
+                              textAlign: TextAlign.center,),
+                              actions: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Divider(
+                                      color: mutedColor,
+                                      thickness: 1,
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        // Mengirimkan nilai 'true' ke fungsi penanganan
+                                        Navigator.of(context).pop(true);
+                                      },
+                                      child: Text('Ya', style: primaryTextStyle.copyWith(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.green
+                                      ),),
+                                    ),
+                                    Divider(
+                                      color: mutedColor,
+                                      thickness: 1,
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        // Mengirimkan nilai 'false' ke fungsi penanganan
+                                        Navigator.of(context).pop(false);
+                                      },
+                                      child: Text('Tidak', style: primaryTextStyle.copyWith(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                        color: primaryColor
+                                      ),),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
+                        ).then((value) {
+                          // Menerima hasil dari popup notifikasi
+                          if (value == true) {
+                            // Tindakan jika pengguna memilih 'Ya'
+                            Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
+                            print('Aksi dilanjutkan');
+                          } else {
+                            // Tindakan jika pengguna memilih 'Tidak'
+                            print('Aksi dibatalkan');
+                          }
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 10,),
                     Container(
                       height: 150,
                       width: 150,

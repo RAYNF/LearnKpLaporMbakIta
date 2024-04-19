@@ -20,6 +20,13 @@ class Laporan extends StatelessWidget {
               snap: true,
               backgroundColor: primaryColor,
               toolbarHeight: 75,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                color: secondaryColor,
+                onPressed: () {
+                  Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
+                },
+              ),
               actions: [
                 Container(
                   height: 65, width: 75,

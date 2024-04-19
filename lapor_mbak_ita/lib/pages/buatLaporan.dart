@@ -17,6 +17,76 @@ class BuatLaporan extends StatelessWidget {
               snap: true,
               backgroundColor: primaryColor,
               toolbarHeight: 75,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                color: secondaryColor,
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Batalkan Laporan', style: primaryTextStyle.copyWith(
+                          fontSize: 16,
+                          fontWeight: bold
+                        ),
+                        textAlign: TextAlign.center,),
+                        content: Text('Apakah Anda yakin ingin membatalkan laporan?', style: primaryTextStyle.copyWith(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500
+                        ),
+                        textAlign: TextAlign.center,),
+                        actions: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Divider(
+                                color: mutedColor,
+                                thickness: 1,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  // Mengirimkan nilai 'true' ke fungsi penanganan
+                                  Navigator.of(context).pop(true);
+                                },
+                                child: Text('Ya', style: primaryTextStyle.copyWith(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.green
+                                ),),
+                              ),
+                              Divider(
+                                color: mutedColor,
+                                thickness: 1,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  // Mengirimkan nilai 'false' ke fungsi penanganan
+                                  Navigator.of(context).pop(false);
+                                },
+                                child: Text('Tidak', style: primaryTextStyle.copyWith(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: primaryColor
+                                ),),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    },
+                  ).then((value) {
+                    // Menerima hasil dari popup notifikasi
+                    if (value == true) {
+                      // Tindakan jika pengguna memilih 'Ya'
+                      Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
+                      print('Aksi dilanjutkan');
+                    } else {
+                      // Tindakan jika pengguna memilih 'Tidak'
+                      print('Aksi dibatalkan');
+                    }
+                  });
+                },
+              ),
               actions: [
                 Container(
                   height: 65, width: 75,

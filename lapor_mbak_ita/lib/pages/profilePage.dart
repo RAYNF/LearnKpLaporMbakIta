@@ -4,6 +4,7 @@ import 'package:lapor_mbak_ita/pages/berita.dart';
 import 'package:lapor_mbak_ita/pages/callCenter.dart';
 import 'package:lapor_mbak_ita/pages/daftarLaporan.dart';
 import 'package:lapor_mbak_ita/pages/editProfile.dart';
+import 'package:lapor_mbak_ita/pages/loginPage.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
 class Profile extends StatelessWidget {
@@ -108,7 +109,88 @@ class Profile extends StatelessWidget {
                   width: 270,
                   child: ElevatedButton(
                     onPressed: (){
-
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Log Out', style: primaryTextStyle.copyWith(
+                              fontSize: 16,
+                              fontWeight: bold
+                            ),
+                            textAlign: TextAlign.center,),
+                            content: Text('Apakah Anda yakin ingin keluar?', style: primaryTextStyle.copyWith(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500
+                            ),
+                            textAlign: TextAlign.center,),
+                            actions: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: secondaryColor,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5), 
+                                          blurRadius: 4,
+                                          offset: Offset(-2, 4),
+                                        ),
+                                      ],
+                                    ),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        // Mengirimkan nilai 'true' ke fungsi penanganan
+                                        Navigator.of(context).pop(true);
+                                      },
+                                      child: Text('Ya', style: primaryTextStyle.copyWith(
+                                        fontSize: 16,
+                                        fontWeight: bold
+                                      ),),
+                                    ),
+                                  ),
+                                  SizedBox(width: 20,),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: primaryColor,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5), 
+                                          blurRadius: 4,
+                                          offset: Offset(-2, 4),
+                                        ),
+                                      ],
+                                    ),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        // Mengirimkan nilai 'false' ke fungsi penanganan
+                                        Navigator.of(context).pop(false);
+                                      },
+                                      child: Text('Tidak', style: primaryTextStyle.copyWith(
+                                        fontSize: 16,
+                                        fontWeight: bold,
+                                        color: secondaryColor
+                                      ),),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        },
+                      ).then((value) {
+                        // Menerima hasil dari popup notifikasi
+                        if (value == true) {
+                          // Tindakan jika pengguna memilih 'Ya'
+                          Navigator.push(context,MaterialPageRoute(builder: ((context) => Login())));
+                          print('Aksi dilanjutkan');
+                        } else {
+                          // Tindakan jika pengguna memilih 'Tidak'
+                          print('Aksi dibatalkan');
+                        }
+                      });
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
