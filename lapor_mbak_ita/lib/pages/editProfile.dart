@@ -246,18 +246,22 @@ class EditProfile extends StatelessWidget {
                         thickness: 1,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(width: 20,),
-                          Image.asset('assets/google.jpeg', width: 25, height: 25,),
-                          SizedBox(width: 20,),
-                          Text("Terhubung", style: primaryTextStyle.copyWith(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: mutedColor
-                          ),),
-                          SizedBox(width: 200,),
+                          Row(
+                            children: [
+                              SizedBox(width: 20,),
+                              Image.asset('assets/google.jpeg', width: 25, height: 25,),
+                              SizedBox(width: 20,),
+                              Text("Terhubung", style: primaryTextStyle.copyWith(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: mutedColor
+                              ),),
+                            ]
+                          ),
                           ElevatedButton(onPressed: (){
-
+                      
                           }, 
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
