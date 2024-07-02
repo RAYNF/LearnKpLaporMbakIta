@@ -1,11 +1,41 @@
 import 'package:flutter/material.dart';
+// import 'package:lapor_mbak_ita/data/api_service.dart';
+// import 'package:lapor_mbak_ita/data/user_model.dart';
 import 'package:lapor_mbak_ita/pages/beranda.dart';
 import 'package:lapor_mbak_ita/pages/registerPage.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class Login extends StatefulWidget {
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  Future<void> loginUser() async {
+    final response = await http.post(
+      Uri.parse('http://192.168.1.12/flutter_auth/login.php'),
+      body: {
+        'email': _emailController.text,
+        'password': _passwordController.text,
+      },
+    );
+
+    final responseBody = jsonDecode(response.body);
+    
+    if (responseBody['message'] == 'Login successful') {
+      // Login successful
+      Navigator.pushReplacementNamed(context, '/beranda');
+    } else {
+      // Handle login error
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(responseBody['message'])));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,19 +67,24 @@ class Login extends StatelessWidget {
                     child: Column(
                       children: <Widget>[
                         SizedBox(height: 40,),
-                        TextField(decoration: InputDecoration(
+                        TextField(
+                          controller: _emailController,
+                          decoration: InputDecoration(
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                          hintText: "Email/No. Telepon/NIP",
+                          labelText: 'Email',
                           suffixIcon: InkWell(onTap: () {
                             
                           }, child: Icon(Icons.person_outline)))),
                         SizedBox(height: 20,),
-                        TextField(decoration: InputDecoration(
+                        TextField(
+                          controller: _passwordController,
+                          decoration: InputDecoration(
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                          hintText: "Password",
+                          labelText: 'Password',
                           suffixIcon: InkWell(onTap: () {
                             
-                          }, child: Icon(Icons.lock_outline)))),
+                          }, child: Icon(Icons.lock_outline))),
+                          obscureText: true,),
                           SizedBox(height: 15,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,9 +117,7 @@ class Login extends StatelessWidget {
                             height: 60,
                             width: MediaQuery.of(context).size.width - 2 * defaultMargin,
                             child: ElevatedButton(
-                              onPressed: (){
-                                Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
-                              },
+                              onPressed: loginUser,
                               child: Text('Masuk', style: primaryTextStyle.copyWith(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -143,7 +176,7 @@ class Login extends StatelessWidget {
                                 style: TextButton.styleFrom(textStyle: 
                                   TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: mutedColor)),
                                 onPressed: (){
-                                  Navigator.push(context,MaterialPageRoute(builder: ((context) => Register())));
+                                  Navigator.push(context, MaterialPageRoute(builder: ((context) => Register())));
                             }, child: Text("Daftar"))
                             ],
                           )

@@ -5,9 +5,35 @@ import 'package:lapor_mbak_ita/pages/callCenter.dart';
 import 'package:lapor_mbak_ita/pages/laporanDetail.dart';
 import 'package:lapor_mbak_ita/pages/profilePage.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:lapor_mbak_ita/data/report_model.dart';
 
-class Beranda extends StatelessWidget {
-  const Beranda({super.key});
+class Beranda extends StatefulWidget {
+  @override
+  _BerandaState createState() => _BerandaState();
+}
+
+class _BerandaState extends State<Beranda> {
+  late Future<List<Report>> futureReports;
+
+  Future<List<Report>> fetchReports() async {
+    final response = await http.get(Uri.parse('http://192.168.1.12/flutter_auth/get_reports.php'));
+
+    if (response.statusCode == 200) {
+      List jsonResponse = json.decode(response.body);
+      return jsonResponse.map((report) => Report.fromJson(report)).toList();
+    } else {
+      throw Exception('Failed to load reports');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    futureReports = fetchReports();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -249,181 +275,215 @@ class Beranda extends StatelessWidget {
           ];
         },
         body: Center(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(context,MaterialPageRoute(builder: ((context) => Laporan())));
-              },
-                child: Container(
-                  width: MediaQuery.of(context).size.width - 2 * defaultMargin,
-                  child: Column(
-                    children: [
-                      SizedBox(height: 10,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                          Image.asset('assets/profil.png', height: 40, width: 40,),
-                          SizedBox(width: 10,),
-                          Text("Username", style: primaryTextStyle.copyWith(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500
-                          ),),
+          // child: SingleChildScrollView(
+          //   scrollDirection: Axis.vertical,
+          //   child: GestureDetector(
+          //     onTap: () {
+          //       Navigator.push(context,MaterialPageRoute(builder: ((context) => Laporan())));
+          //     },
+          //       child: Container(
+          //         width: MediaQuery.of(context).size.width - 2 * defaultMargin,
+          //         child: Column(
+          //           children: [
+          //             SizedBox(height: 10,),
+          //             Row(
+          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //               children: [
+          //                 Row(
+          //                   children: [
+          //                 Image.asset('assets/profil.png', height: 40, width: 40,),
+          //                 SizedBox(width: 10,),
+          //                 Text("Username", style: primaryTextStyle.copyWith(
+          //                   fontSize: 14,
+          //                   fontWeight: FontWeight.w500
+          //                 ),),
                   
-                            ],
-                          ),
-                          Text("DD-MM-YYYY", style: primaryTextStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500
-                          ),)
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(15),
-                        child: Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.",
-                        textAlign: TextAlign.justify,),
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width - 2 * defaultMargin,
-                        height: 220,
-                        decoration: BoxDecoration(
-                          color: mutedColor,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.asset('assets/laporan 2.jpeg', fit: BoxFit.cover,),
-                        ) 
-                      ),
-                      SizedBox(height: 5,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Image.asset('assets/icon.png', height: 30, width: 30, color: darkColor,),
-                              SizedBox(width: 5,),
-                              Text("2", style: primaryTextStyle.copyWith(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: mutedColor,
-                              ),),
-                              SizedBox(width: 5,),
-                              Image.asset('assets/komen.png', height: 40, width: 40, color: darkColor,),
-                              SizedBox(width: 5,),
-                              Image.asset('assets/share.png', height: 30, width: 30,),
-                              ],
-                          ),
-                          Container(
-                              height: 30,
-                              width: 105,
-                              child: ElevatedButton(
-                                onPressed: (){},
-                                child: Text('Selesai', style: primaryTextStyle.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                  color: darkColor),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: selesaiColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20))
-                                ),),
-                          ), 
-                        ],
-                      ),
-                      Divider(
-                        color: mutedColor,
-                        thickness: 1,
-                      ),
-                      SizedBox(height: 5,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                          Image.asset('assets/profil.png', height: 40, width: 40,),
-                          SizedBox(width: 10,),
-                          Text("Username", style: primaryTextStyle.copyWith(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500
-                          ),),
+          //                   ],
+          //                 ),
+          //                 Text("DD-MM-YYYY", style: primaryTextStyle.copyWith(
+          //                   fontSize: 12,
+          //                   fontWeight: FontWeight.w500
+          //                 ),)
+          //               ],
+          //             ),
+          //             Padding(
+          //               padding: EdgeInsets.all(15),
+          //               child: Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.",
+          //               textAlign: TextAlign.justify,),
+          //             ),
+          //             Container(
+          //               width: MediaQuery.of(context).size.width - 2 * defaultMargin,
+          //               height: 220,
+          //               decoration: BoxDecoration(
+          //                 color: mutedColor,
+          //                 borderRadius: BorderRadius.circular(15),
+          //               ),
+          //               child: ClipRRect(
+          //                 borderRadius: BorderRadius.circular(15),
+          //                 child: Image.asset('assets/laporan 2.jpeg', fit: BoxFit.cover,),
+          //               ) 
+          //             ),
+          //             SizedBox(height: 5,),
+          //             Row(
+          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //               children: [
+          //                 Row(
+          //                   mainAxisAlignment: MainAxisAlignment.start,
+          //                   children: [
+          //                     Image.asset('assets/icon.png', height: 30, width: 30, color: darkColor,),
+          //                     SizedBox(width: 5,),
+          //                     Text("2", style: primaryTextStyle.copyWith(
+          //                       fontSize: 14,
+          //                       fontWeight: FontWeight.w500,
+          //                       color: mutedColor,
+          //                     ),),
+          //                     SizedBox(width: 5,),
+          //                     Image.asset('assets/komen.png', height: 40, width: 40, color: darkColor,),
+          //                     SizedBox(width: 5,),
+          //                     Image.asset('assets/share.png', height: 30, width: 30,),
+          //                     ],
+          //                 ),
+          //                 Container(
+          //                     height: 30,
+          //                     width: 105,
+          //                     child: ElevatedButton(
+          //                       onPressed: (){},
+          //                       child: Text('Selesai', style: primaryTextStyle.copyWith(
+          //                         fontSize: 12,
+          //                         fontWeight: FontWeight.w500,
+          //                         color: darkColor),
+          //                       ),
+          //                       style: ElevatedButton.styleFrom(
+          //                         backgroundColor: selesaiColor,
+          //                         shape: RoundedRectangleBorder(
+          //                           borderRadius: BorderRadius.circular(20))
+          //                       ),),
+          //                 ), 
+          //               ],
+          //             ),
+          //             Divider(
+          //               color: mutedColor,
+          //               thickness: 1,
+          //             ),
+          //             SizedBox(height: 5,),
+          //             Row(
+          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //               children: [
+          //                 Row(
+          //                   children: [
+          //                 Image.asset('assets/profil.png', height: 40, width: 40,),
+          //                 SizedBox(width: 10,),
+          //                 Text("Username", style: primaryTextStyle.copyWith(
+          //                   fontSize: 14,
+          //                   fontWeight: FontWeight.w500
+          //                 ),),
                   
-                            ],
+          //                   ],
+          //                 ),
+          //                 Text("DD-MM-YYYY", style: primaryTextStyle.copyWith(
+          //                   fontSize: 12,
+          //                   fontWeight: FontWeight.w500
+          //                 ),)
+          //               ],
+          //             ),
+          //             Padding(
+          //               padding: EdgeInsets.all(15),
+          //               child: Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.",
+          //               textAlign: TextAlign.justify,),
+          //             ),
+          //             Container(
+          //               width: MediaQuery.of(context).size.width - 2 * defaultMargin,
+          //               height: 220,
+          //               decoration: BoxDecoration(
+          //                 color: mutedColor,
+          //                 borderRadius: BorderRadius.circular(15),
+          //               ),
+          //               child: ClipRRect(
+          //                 borderRadius: BorderRadius.circular(15),
+          //                 child: Image.asset('assets/laporan 1.jpg', fit: BoxFit.cover,),
+          //               ) 
+          //             ),
+          //             SizedBox(height: 5,),
+          //             Row(
+          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //               children: [
+          //                 Row(
+          //                   mainAxisAlignment: MainAxisAlignment.start,
+          //                   children: [
+          //                     Image.asset('assets/icon.png', height: 30, width: 30, color: darkColor,),
+          //                     SizedBox(width: 5,),
+          //                     Text("2", style: primaryTextStyle.copyWith(
+          //                       fontSize: 14,
+          //                       fontWeight: FontWeight.w500,
+          //                       color: mutedColor,
+          //                     ),),
+          //                     SizedBox(width: 5,),
+          //                     Image.asset('assets/komen.png', height: 40, width: 40, color: darkColor,),
+          //                     SizedBox(width: 5,),
+          //                     Image.asset('assets/share.png', height: 30, width: 30,),
+          //                     ],
+          //                 ),
+          //                 Container(
+          //                     height: 30,
+          //                     width: 105,
+          //                     child: ElevatedButton(
+          //                       onPressed: (){},
+          //                       child: Text('Verifikasi', style: primaryTextStyle.copyWith(
+          //                         fontSize: 12,
+          //                         fontWeight: FontWeight.w500,
+          //                         color: darkColor),
+          //                       ),
+          //                       style: ElevatedButton.styleFrom(
+          //                         backgroundColor: verifikasiColor,
+          //                         shape: RoundedRectangleBorder(
+          //                           borderRadius: BorderRadius.circular(20))
+          //                       ),),
+          //                 ), 
+          //               ],
+          //             ),
+          //             Divider(
+          //               color: mutedColor,
+          //               thickness: 1,
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          child: FutureBuilder<List<Report>>(
+          future: futureReports,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else if (!snapshot.hasData) {
+              return Text('No reports found');
+            } else {
+              return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  Report report = snapshot.data![index];
+                  return Card(
+                    child: ListTile(
+                      leading: Image.memory(base64Decode(report.image)),
+                      title: Text(report.title),
+                      subtitle: Text(report.description),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Laporan(report: report),
                           ),
-                          Text("DD-MM-YYYY", style: primaryTextStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500
-                          ),)
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(15),
-                        child: Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.",
-                        textAlign: TextAlign.justify,),
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width - 2 * defaultMargin,
-                        height: 220,
-                        decoration: BoxDecoration(
-                          color: mutedColor,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.asset('assets/laporan 1.jpg', fit: BoxFit.cover,),
-                        ) 
-                      ),
-                      SizedBox(height: 5,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Image.asset('assets/icon.png', height: 30, width: 30, color: darkColor,),
-                              SizedBox(width: 5,),
-                              Text("2", style: primaryTextStyle.copyWith(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: mutedColor,
-                              ),),
-                              SizedBox(width: 5,),
-                              Image.asset('assets/komen.png', height: 40, width: 40, color: darkColor,),
-                              SizedBox(width: 5,),
-                              Image.asset('assets/share.png', height: 30, width: 30,),
-                              ],
-                          ),
-                          Container(
-                              height: 30,
-                              width: 105,
-                              child: ElevatedButton(
-                                onPressed: (){},
-                                child: Text('Verifikasi', style: primaryTextStyle.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                  color: darkColor),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: verifikasiColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20))
-                                ),),
-                          ), 
-                        ],
-                      ),
-                      Divider(
-                        color: mutedColor,
-                        thickness: 1,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              );
+            }
+          },
+        ),
           ),
       ),
       floatingActionButton: FloatingActionButton(

@@ -1,9 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:lapor_mbak_ita/pages/beranda.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:io';
 
-class BuatLaporan extends StatelessWidget {
-  const BuatLaporan ({super.key});
+
+class BuatLaporan extends StatefulWidget {
+  @override
+  _BuatLaporanState createState() => _BuatLaporanState();
+}
+
+class _BuatLaporanState extends State<BuatLaporan> {
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _locationController = TextEditingController();
+  File? _image;
+
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> _pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
+  }
+
+  Future<void> _submitReport() async {
+    if (_image == null) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please select an image')));
+      return;
+    }
+
+    final request = http.MultipartRequest('POST', Uri.parse('http://192.168.1.12/flutter_auth/add_report.php'));
+    request.fields['title'] = _titleController.text;
+    request.fields['description'] = _descriptionController.text;
+    request.fields['location'] = _locationController.text;
+    request.files.add(await http.MultipartFile.fromPath('image', _image!.path));
+
+    final response = await request.send();
+    final responseBody = await response.stream.bytesToString();
+
+    final responseJson = jsonDecode(responseBody);
+
+    if (responseJson['status'] == 'success') {
+      Navigator.pushReplacementNamed(context, '/beranda');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(responseJson['message'])));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,16 +154,9 @@ class BuatLaporan extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width - 2 * defaultMargin,
-                    height: 250,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade400
-                    ),
-                    child: Center(
-                      child: Image.asset('assets/ambil gambar.png'),
-                    ),
-                  ),
+                  _image == null ? Text('No image selected.') : Image.file(_image!),
+                  SizedBox(height: 20),
+                  ElevatedButton(onPressed: _pickImage, child: Text('Pick Image')),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -133,21 +175,13 @@ class BuatLaporan extends StatelessWidget {
                     fontSize: 16,
                     fontWeight: bold
                   ),),
-                  SizedBox(height: 30,),
-                  Divider(
-                      color: darkColor,
-                      thickness: 1,
-                  ),
+                  TextField(controller: _titleController, decoration: InputDecoration(labelText: 'title'),),
                   SizedBox(height: 30,),
                   Text("Deskripsi", style: primaryTextStyle.copyWith(
                     fontSize: 16,
                     fontWeight: bold
                   ),),
-                  SizedBox(height: 30,),
-                  Divider(
-                      color: darkColor,
-                      thickness: 1,
-                  ),
+                  TextField(controller: _descriptionController, decoration: InputDecoration(labelText: 'description'),),
                   SizedBox(height: 30,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -160,11 +194,7 @@ class BuatLaporan extends StatelessWidget {
                       ),)
                     ],
                   ),
-                  SizedBox(height: 30,),
-                  Divider(
-                      color: darkColor,
-                      thickness: 1,
-                  ),
+                  TextField(controller: _locationController, decoration: InputDecoration(labelText: 'location'),),
                   SizedBox(height: 10,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -201,11 +231,7 @@ class BuatLaporan extends StatelessWidget {
                     fontSize: 16,
                     fontWeight: bold
                   ),),
-                  SizedBox(height: 30,),
-                  Divider(
-                      color: darkColor,
-                      thickness: 1,
-                  ),
+                  TextField(decoration: InputDecoration(labelText: 'detail'),),
                   SizedBox(height: 30,),
                   Row(
                     children: [
@@ -260,9 +286,7 @@ class BuatLaporan extends StatelessWidget {
                         width: 165,
                         child: Container(
                           child: ElevatedButton(
-                          onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: ((context) => Beranda())));
-                          },
+                          onPressed: _submitReport,
                           child: Text('Buat Laporan', style: primaryTextStyle.copyWith(
                             fontSize: 16,
                             fontWeight: bold,
