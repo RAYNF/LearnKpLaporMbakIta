@@ -8,12 +8,12 @@ import 'dart:convert';
 import 'dart:io';
 
 
-class BuatLaporan extends StatefulWidget {
+class BuatBerita extends StatefulWidget {
   @override
-  _BuatLaporanState createState() => _BuatLaporanState();
+  _BuatBeritaState createState() => _BuatBeritaState();
 }
 
-class _BuatLaporanState extends State<BuatLaporan> {
+class _BuatBeritaState extends State<BuatBerita> {
   final _formKey = GlobalKey<FormState>();
   late String _title, _description, _location;
   File? _image;
@@ -107,76 +107,6 @@ class _BuatLaporanState extends State<BuatLaporan> {
               snap: true,
               backgroundColor: primaryColor,
               toolbarHeight: 75,
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back),
-                color: secondaryColor,
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Batalkan Laporan', style: primaryTextStyle.copyWith(
-                          fontSize: 16,
-                          fontWeight: bold
-                        ),
-                        textAlign: TextAlign.center,),
-                        content: Text('Apakah Anda yakin ingin membatalkan laporan?', style: primaryTextStyle.copyWith(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500
-                        ),
-                        textAlign: TextAlign.center,),
-                        actions: <Widget>[
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Divider(
-                                color: mutedColor,
-                                thickness: 1,
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  // Mengirimkan nilai 'true' ke fungsi penanganan
-                                  Navigator.of(context).pop(true);
-                                },
-                                child: Text('Ya', style: primaryTextStyle.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.green
-                                ),),
-                              ),
-                              Divider(
-                                color: mutedColor,
-                                thickness: 1,
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  // Mengirimkan nilai 'false' ke fungsi penanganan
-                                  Navigator.of(context).pop(false);
-                                },
-                                child: Text('Tidak', style: primaryTextStyle.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                  color: primaryColor
-                                ),),
-                              ),
-                            ],
-                          ),
-                        ],
-                      );
-                    },
-                  ).then((value) {
-                    // Menerima hasil dari popup notifikasi
-                    if (value == true) {
-                      // Tindakan jika pengguna memilih 'Ya'
-                      Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
-                      print('Aksi dilanjutkan');
-                    } else {
-                      // Tindakan jika pengguna memilih 'Tidak'
-                      print('Aksi dibatalkan');
-                    }
-                  });
-                },
-              ),
               actions: [
                 Container(
                   height: 65, width: 75,
@@ -187,68 +117,8 @@ class _BuatLaporanState extends State<BuatLaporan> {
             )
           ];
         },
-      //   body: Padding(
-      //   padding: const EdgeInsets.all(16.0),
-      //   child: Form(
-      //     key: _formKey,
-      //     child: Column(
-      //       children: [
-      //         TextFormField(
-      //           decoration: InputDecoration(labelText: 'Title'),
-      //           validator: (value) {
-      //             if (value!.isEmpty) {
-      //               return 'Please enter a title';
-      //             }
-      //             return null;
-      //           },
-      //           onSaved: (value) {
-      //             _title = value!;
-      //           },
-      //         ),
-      //         TextFormField(
-      //           decoration: InputDecoration(labelText: 'Description'),
-      //           validator: (value) {
-      //             if (value!.isEmpty) {
-      //               return 'Please enter a description';
-      //             }
-      //             return null;
-      //           },
-      //           onSaved: (value) {
-      //             _description = value!;
-      //           },
-      //         ),
-      //         TextFormField(
-      //           decoration: InputDecoration(labelText: 'Location'),
-      //           validator: (value) {
-      //             if (value!.isEmpty) {
-      //               return 'Please enter a location';
-      //             }
-      //             return null;
-      //           },
-      //           onSaved: (value) {
-      //             _location = value!;
-      //           },
-      //         ),
-      //         SizedBox(height: 20),
-      //         ElevatedButton(
-      //           onPressed: _pickImage,
-      //           child: Text('Select Image'),
-      //         ),
-      //         SizedBox(height: 20),
-      //         ElevatedButton(
-      //           onPressed: _getLocation,
-      //           child: Text('Get Location'),
-      //         ),
-      //         SizedBox(height: 20),
-      //         ElevatedButton(
-      //           onPressed: _submitReport,
-      //           child: Text('Submit Report'),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
-        body: SafeArea(
+ 
+ body: SafeArea(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Container(
@@ -277,13 +147,13 @@ class _BuatLaporanState extends State<BuatLaporan> {
                     fontSize: 16,
                     fontWeight: bold
                   ),),
-                  TextField(/*controller: _titleController,*/ decoration: InputDecoration(labelText: 'title'),),
+                  TextField(decoration: InputDecoration(labelText: 'title'),),
                   SizedBox(height: 30,),
                   Text("Deskripsi", style: primaryTextStyle.copyWith(
                     fontSize: 16,
                     fontWeight: bold
                   ),),
-                  TextField(/*controller: _descriptionController,*/ decoration: InputDecoration(labelText: 'description'),),
+                  TextField(decoration: InputDecoration(labelText: 'description'),),
                   SizedBox(height: 30,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -296,7 +166,7 @@ class _BuatLaporanState extends State<BuatLaporan> {
                       ),)
                     ],
                   ),
-                  TextField(/*controller: _locationController,*/ decoration: InputDecoration(labelText: 'location'),),
+                  TextField(decoration: InputDecoration(labelText: 'location'),),
                   SizedBox(height: 10,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -347,7 +217,7 @@ class _BuatLaporanState extends State<BuatLaporan> {
                         ),
                       ),
                       SizedBox(width: 10,),
-                      Text("Laporan Rahasia", style: primaryTextStyle.copyWith(
+                      Text("Berita Rahasia", style: primaryTextStyle.copyWith(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
                         color: mutedColor))
@@ -389,7 +259,7 @@ class _BuatLaporanState extends State<BuatLaporan> {
                         child: Container(
                           child: ElevatedButton(
                           onPressed: _submitReport,
-                          child: Text('Buat Laporan', style: primaryTextStyle.copyWith(
+                          child: Text('Buat Berita', style: primaryTextStyle.copyWith(
                             fontSize: 16,
                             fontWeight: bold,
                             color: secondaryColor),
@@ -408,8 +278,4 @@ class _BuatLaporanState extends State<BuatLaporan> {
               ),
             )
           ),
-        ),
-      )
-    );
-  }
-}
+        )));}}

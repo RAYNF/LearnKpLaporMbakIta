@@ -23,30 +23,30 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/buat_laporan',
+      initialRoute: '/beranda',
       routes: {
         '/login' : (context) => Login(),
         '/beranda' : (context) => Beranda(),
         '/buat_laporan' : (context) => BuatLaporan(),
       },
-      onGenerateRoute: (settings){
-        if (settings.name == '/laporan_detail') {
-          final Report report = settings.arguments as Report;
-          return MaterialPageRoute(
-            builder: (context) {
-              return Laporan(report: report);
-            },
-          );
-        }
-        return null;
-      },
+      // onGenerateRoute: (settings){
+      //   if (settings.name == '/laporan_detail') {
+      //     final Report report = settings.arguments as Report;
+      //     return MaterialPageRoute(
+      //       builder: (context) {
+      //         return Laporan(report: report);
+      //       },
+      //     );
+      //   }
+      //   return null;
+      // },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.cyan,
         primaryColor: primaryColor,
         canvasColor: Colors.transparent,
       ),
-      home: BuatLaporan(),
+      home: Beranda(),
     );
   }
 }

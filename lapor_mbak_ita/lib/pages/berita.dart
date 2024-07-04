@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lapor_mbak_ita/pages/beranda.dart';
 import 'package:lapor_mbak_ita/pages/beritaDetail.dart';
+import 'package:lapor_mbak_ita/pages/buatBerita.dart';
 import 'package:lapor_mbak_ita/pages/callCenter.dart';
 import 'package:lapor_mbak_ita/pages/profilePage.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
@@ -378,6 +379,12 @@ class Berita extends StatelessWidget {
           ) 
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: ((context) => BuatBerita())));
+        }, child: Icon(Icons.add, color: secondaryColor,), 
+        backgroundColor: primaryColor,
+        shape: CircleBorder(),),
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
