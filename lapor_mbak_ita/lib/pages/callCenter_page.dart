@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lapor_mbak_ita/pages/beranda.dart';
-import 'package:lapor_mbak_ita/pages/berita.dart';
-import 'package:lapor_mbak_ita/pages/profilePage.dart';
+import 'package:lapor_mbak_ita/pages/beranda_page.dart';
+import 'package:lapor_mbak_ita/pages/berita_page.dart';
+import 'package:lapor_mbak_ita/pages/profile_page.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
 class CallCenter extends StatelessWidget {
@@ -556,7 +556,8 @@ class CallCenter extends StatelessWidget {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.home), color: darkColor,onPressed: () {
-                Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
+                //error
+                // Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
               },),
               label: 'Laporan',
             ),
@@ -574,7 +575,8 @@ class CallCenter extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.person), color: darkColor,onPressed: () {
-                 Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
+                //error
+                //  Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
               },),
               label: 'Profile',
             ),

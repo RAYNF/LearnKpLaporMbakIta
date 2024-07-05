@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lapor_mbak_ita/pages/beranda.dart';
-import 'package:lapor_mbak_ita/pages/beritaDetail.dart';
-import 'package:lapor_mbak_ita/pages/buatBerita.dart';
-import 'package:lapor_mbak_ita/pages/callCenter.dart';
-import 'package:lapor_mbak_ita/pages/profilePage.dart';
+import 'package:lapor_mbak_ita/pages/beranda_page.dart';
+import 'package:lapor_mbak_ita/pages/beritaDetail_page.dart';
+import 'package:lapor_mbak_ita/pages/buatBerita_page.dart';
+import 'package:lapor_mbak_ita/pages/callCenter_page.dart';
+import 'package:lapor_mbak_ita/pages/profile_page.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
 class Berita extends StatelessWidget {
@@ -396,7 +396,8 @@ class Berita extends StatelessWidget {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.home), color: darkColor,onPressed: () {
-                Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
+                //error
+                // Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
               },),
               label: 'Laporan',
             ),
@@ -414,7 +415,8 @@ class Berita extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.person), color: darkColor,onPressed: () {
-                 Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
+                //error
+                //  Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
               },),
               label: 'Profile',
             ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:lapor_mbak_ita/pages/beranda.dart';
+import 'package:lapor_mbak_ita/pages/beranda_page.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
@@ -168,7 +168,8 @@ class _BuatLaporanState extends State<BuatLaporan> {
                     // Menerima hasil dari popup notifikasi
                     if (value == true) {
                       // Tindakan jika pengguna memilih 'Ya'
-                      Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
+                      //blm ada
+                      // Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
                       print('Aksi dilanjutkan');
                     } else {
                       // Tindakan jika pengguna memilih 'Tidak'

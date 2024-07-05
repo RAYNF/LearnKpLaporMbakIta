@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:lapor_mbak_ita/pages/beranda.dart';
+import 'package:lapor_mbak_ita/pages/beranda_page.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;

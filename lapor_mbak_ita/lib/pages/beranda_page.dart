@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:lapor_mbak_ita/pages/berita.dart';
-import 'package:lapor_mbak_ita/pages/buatLaporan.dart';
-import 'package:lapor_mbak_ita/pages/callCenter.dart';
-import 'package:lapor_mbak_ita/pages/laporanDetail.dart';
-import 'package:lapor_mbak_ita/pages/profilePage.dart';
+import 'package:lapor_mbak_ita/data/model/login_model.dart';
+import 'package:lapor_mbak_ita/pages/berita_page.dart';
+import 'package:lapor_mbak_ita/pages/buatLaporan_page.dart';
+import 'package:lapor_mbak_ita/pages/callCenter_page.dart';
+import 'package:lapor_mbak_ita/pages/laporanDetail_page.dart';
+import 'package:lapor_mbak_ita/pages/profile_page.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:lapor_mbak_ita/data/report_model.dart';
+import 'package:lapor_mbak_ita/data/model/report_model.dart';
 
 class Beranda extends StatefulWidget {
+  final User dataUser;
+
+  const Beranda({super.key,required this.dataUser});
+
   @override
   _BerandaState createState() => _BerandaState();
 }
@@ -499,7 +504,9 @@ class _BerandaState extends State<Beranda> {
             top: BorderSide(color: mutedColor, width: 1.0), // Menambahkan border hanya pada bagian atas
           ),
         ),
-        child: BottomNavigationBar(
+        child: 
+        //bottom navigation
+        BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.home), color: darkColor,onPressed: () {
@@ -521,7 +528,7 @@ class _BerandaState extends State<Beranda> {
             ),
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.person), color: darkColor,onPressed: () {
-                 Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
+                 Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile(dataUser: widget.dataUser,))));
               },),
               label: 'Profile',
             ),

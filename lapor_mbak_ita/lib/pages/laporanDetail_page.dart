@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lapor_mbak_ita/data/report_model.dart';
-import 'package:lapor_mbak_ita/pages/beranda.dart';
-import 'package:lapor_mbak_ita/pages/berita.dart';
-import 'package:lapor_mbak_ita/pages/callCenter.dart';
-import 'package:lapor_mbak_ita/pages/profilePage.dart';
+import 'package:lapor_mbak_ita/data/model/report_model.dart';
+import 'package:lapor_mbak_ita/pages/beranda_page.dart';
+import 'package:lapor_mbak_ita/pages/berita_page.dart';
+import 'package:lapor_mbak_ita/pages/callCenter_page.dart';
+import 'package:lapor_mbak_ita/pages/profile_page.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 import 'dart:convert';
 
@@ -28,7 +28,8 @@ class Laporan extends StatelessWidget {
                 icon: Icon(Icons.arrow_back),
                 color: secondaryColor,
                 onPressed: () {
-                  Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
+                  //error
+                  // Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
                 },
               ),
               actions: [
@@ -214,7 +215,8 @@ class Laporan extends StatelessWidget {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.home), color: darkColor,onPressed: () {
-                Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
+                //error
+                // Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
               },),
               label: 'Laporan',
             ),
@@ -232,7 +234,8 @@ class Laporan extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.person), color: darkColor,onPressed: () {
-                 Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
+                //error
+                //  Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
               },),
               label: 'Profile',
             ),

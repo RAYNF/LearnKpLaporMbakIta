@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lapor_mbak_ita/pages/profilePage.dart';
+import 'package:lapor_mbak_ita/pages/profile_page.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
 class EditProfile extends StatelessWidget {
@@ -81,7 +81,8 @@ class EditProfile extends StatelessWidget {
                           // Menerima hasil dari popup notifikasi
                           if (value == true) {
                             // Tindakan jika pengguna memilih 'Ya'
-                            Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
+                            //error
+                            // Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
                             print('Aksi dilanjutkan');
                           } else {
                             // Tindakan jika pengguna memilih 'Tidak'
@@ -291,7 +292,8 @@ class EditProfile extends StatelessWidget {
                         width: MediaQuery.of(context).size.width - 2 * defaultMargin,
                         child: ElevatedButton(
                           onPressed: (){
-                            Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
+                            //error
+                            // Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
                           },
                           child: Text('Simpan', style: primaryTextStyle.copyWith(
                             fontSize: 16,
