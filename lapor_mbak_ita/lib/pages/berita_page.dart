@@ -1,13 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:lapor_mbak_ita/data/api/api_service.dart';
+import 'package:lapor_mbak_ita/data/model/get_news_model.dart';
+import 'package:lapor_mbak_ita/data/model/get_report_model.dart';
+import 'package:lapor_mbak_ita/data/model/login_model.dart';
 import 'package:lapor_mbak_ita/pages/beranda_page.dart';
 import 'package:lapor_mbak_ita/pages/beritaDetail_page.dart';
 import 'package:lapor_mbak_ita/pages/buatBerita_page.dart';
 import 'package:lapor_mbak_ita/pages/callCenter_page.dart';
 import 'package:lapor_mbak_ita/pages/profile_page.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
+import 'package:lapor_mbak_ita/widget/news_widget.dart';
 
-class Berita extends StatelessWidget {
-  const Berita({super.key});
+class Berita extends StatefulWidget {
+  final User dataUser;
+
+  const Berita({super.key, required this.dataUser});
+
+  @override
+  _BeritaState createState() => _BeritaState();
+}
+
+class _BeritaState extends State<Berita> {
+  
+  late Future<GetNewsModel> _getNews;
+  late GetNewsModel getNewsModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _getNews = ApiService().getNewsAll();
+    _getNews.then((value) {
+      getNewsModel = value;
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,360 +57,77 @@ class Berita extends StatelessWidget {
             )
           ];
         },
-        body: SafeArea(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(context,MaterialPageRoute(builder: ((context) => BeritaDetail())));
-              },
-              child: Padding(padding: EdgeInsets.all(20),
+        //report
+          body: Center(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+             
+              child: Container(
+                width: MediaQuery.of(context).size.width - 2 * defaultMargin,
+                height: MediaQuery.of(context).size.height,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 175,
-                          height: 110,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade400
-                          ),
-                        ),
-                        SizedBox(width: 5,),
-                        Expanded(
-                          child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Rabu, 12 Mei 2024", style: primaryTextStyle.copyWith(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500 
-                                ),),
-                                Text("14:00 WIB", style: primaryTextStyle.copyWith(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500 
-                                ),),
-                              ],
-                            ),
-                            SizedBox(height: 5,),
-                            Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.", 
-                            style: primaryTextStyle.copyWith(
-                              fontSize: 14,
-                              fontWeight: bold
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            textAlign: TextAlign.justify,),
-                            SizedBox(height: 5,),
-                            Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.", 
-                            style: primaryTextStyle.copyWith(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
-                            textAlign: TextAlign.justify,),
-                          ],
-                        ),)
-                      ],
-                    ),
-                    SizedBox(height: 15,),
-                    Divider(
-                      color: mutedColor,
-                      thickness: 1,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 175,
-                          height: 110,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade400
-                          ),
-                        ),
-                        SizedBox(width: 5,),
-                        Expanded(
-                          child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Rabu, 12 Mei 2024", style: primaryTextStyle.copyWith(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500 
-                                ),),
-                                Text("14:00 WIB", style: primaryTextStyle.copyWith(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500 
-                                ),),
-                              ],
-                            ),
-                            SizedBox(height: 5,),
-                            Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.", 
-                            style: primaryTextStyle.copyWith(
-                              fontSize: 14,
-                              fontWeight: bold
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            textAlign: TextAlign.justify,),
-                            SizedBox(height: 5,),
-                            Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.", 
-                            style: primaryTextStyle.copyWith(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
-                            textAlign: TextAlign.justify,),
-                          ],
-                        ),)
-                      ],
-                    ),
-                    SizedBox(height: 15,),
-                    Divider(
-                      color: mutedColor,
-                      thickness: 1,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 175,
-                          height: 110,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade400
-                          ),
-                        ),
-                        SizedBox(width: 5,),
-                        Expanded(
-                          child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Rabu, 12 Mei 2024", style: primaryTextStyle.copyWith(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500 
-                                ),),
-                                Text("14:00 WIB", style: primaryTextStyle.copyWith(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500 
-                                ),),
-                              ],
-                            ),
-                            SizedBox(height: 5,),
-                            Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.", 
-                            style: primaryTextStyle.copyWith(
-                              fontSize: 14,
-                              fontWeight: bold
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            textAlign: TextAlign.justify,),
-                            SizedBox(height: 5,),
-                            Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.", 
-                            style: primaryTextStyle.copyWith(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
-                            textAlign: TextAlign.justify,),
-                          ],
-                        ),)
-                      ],
-                    ),
-                    SizedBox(height: 15,),
-                    Divider(
-                      color: mutedColor,
-                      thickness: 1,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 175,
-                          height: 110,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade400
-                          ),
-                        ),
-                        SizedBox(width: 5,),
-                        Expanded(
-                          child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Rabu, 12 Mei 2024", style: primaryTextStyle.copyWith(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500 
-                                ),),
-                                Text("14:00 WIB", style: primaryTextStyle.copyWith(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500 
-                                ),),
-                              ],
-                            ),
-                            SizedBox(height: 5,),
-                            Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.", 
-                            style: primaryTextStyle.copyWith(
-                              fontSize: 14,
-                              fontWeight: bold
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            textAlign: TextAlign.justify,),
-                            SizedBox(height: 5,),
-                            Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.", 
-                            style: primaryTextStyle.copyWith(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
-                            textAlign: TextAlign.justify,),
-                          ],
-                        ),)
-                      ],
-                    ),
-                    SizedBox(height: 15,),
-                    Divider(
-                      color: mutedColor,
-                      thickness: 1,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 175,
-                          height: 110,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade400
-                          ),
-                        ),
-                        SizedBox(width: 5,),
-                        Expanded(
-                          child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Rabu, 12 Mei 2024", style: primaryTextStyle.copyWith(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500 
-                                ),),
-                                Text("14:00 WIB", style: primaryTextStyle.copyWith(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500 
-                                ),),
-                              ],
-                            ),
-                            SizedBox(height: 5,),
-                            Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.", 
-                            style: primaryTextStyle.copyWith(
-                              fontSize: 14,
-                              fontWeight: bold
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            textAlign: TextAlign.justify,),
-                            SizedBox(height: 5,),
-                            Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.", 
-                            style: primaryTextStyle.copyWith(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
-                            textAlign: TextAlign.justify,),
-                          ],
-                        ),)
-                      ],
-                    ),
-                    SizedBox(height: 15,),
-                    Divider(
-                      color: mutedColor,
-                      thickness: 1,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 175,
-                          height: 110,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade400
-                          ),
-                        ),
-                        SizedBox(width: 5,),
-                        Expanded(
-                          child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Rabu, 12 Mei 2024", style: primaryTextStyle.copyWith(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500 
-                                ),),
-                                Text("14:00 WIB", style: primaryTextStyle.copyWith(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500 
-                                ),),
-                              ],
-                            ),
-                            SizedBox(height: 5,),
-                            Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.", 
-                            style: primaryTextStyle.copyWith(
-                              fontSize: 14,
-                              fontWeight: bold
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            textAlign: TextAlign.justify,),
-                            SizedBox(height: 5,),
-                            Text("Lorem Ipsum has been the industry's standard dummy text ever since the  1500s, when an unknown printer took a galley of type and scrambled it to  make a type specimen book.", 
-                            style: primaryTextStyle.copyWith(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
-                            textAlign: TextAlign.justify,),
-                          ],
-                        ),)
-                      ],
-                    ),
-                    SizedBox(height: 15,),
-                    Divider(
-                      color: mutedColor,
-                      thickness: 1,
-                    ),
+                  
+                    Container(
+                      height: MediaQuery.of(context).size.height,
+                      width: double.infinity,
+                      child: FutureBuilder<GetNewsModel>(
+                        future: _getNews,
+                        builder:
+                            (context, AsyncSnapshot<GetNewsModel> snapshot) {
+                          var state = snapshot.connectionState;
+                          if (state != ConnectionState.done) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else {
+                            if (snapshot.hasData) {
+                              return ListView.builder(
+                                itemCount: snapshot.data?.news.length,
+                                itemBuilder: (context, index) {
+                                  var news = snapshot.data!.news[index];
+                                  return NewsWidget(news: news, dataUser: widget.dataUser,);
+                                },
+                              );
+                            } else if (snapshot.hasError) {
+                              return Center(
+                                child: Material(
+                                  child: Text(snapshot.error.toString()),
+                                ),
+                              );
+                            } else {
+                              return const Material(
+                                child: Text(" "),
+                              );
+                            }
+                          }
+                        },
+                      ),
+                    )
                   ],
                 ),
               ),
+              // ),
             ),
-          ) 
+           
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: ((context) => BuatBerita())));
-        }, child: Icon(Icons.add, color: secondaryColor,), 
-        backgroundColor: primaryColor,
-        shape: CircleBorder(),),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: ((context) => BuatBerita(
+                          dataUser: widget.dataUser,
+                        ))));
+          },
+          child: Icon(
+            Icons.add,
+            color: secondaryColor,
+          ),
+          backgroundColor: primaryColor,
+          shape: CircleBorder(),
+        ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
@@ -396,9 +139,8 @@ class Berita extends StatelessWidget {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.home), color: darkColor,onPressed: () {
-                //error
-                // Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
-              },),
+                Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda(dataUser: widget.dataUser,))));
+                },),
               label: 'Laporan',
             ),
             BottomNavigationBarItem(
@@ -409,15 +151,14 @@ class Berita extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.call), color: darkColor,onPressed: () {
-                Navigator.push(context,MaterialPageRoute(builder: ((context) => CallCenter())));
+                Navigator.push(context,MaterialPageRoute(builder: ((context) => CallCenter(dataUser: widget.dataUser,))));
               },),
               label: 'Call Center',
             ),
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.person), color: darkColor,onPressed: () {
-                //error
-                //  Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
-              },),
+                Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile(dataUser: widget.dataUser,))));
+                 },),
               label: 'Profile',
             ),
           ],

@@ -3,12 +3,15 @@ import 'package:lapor_mbak_ita/data/model/get_report_model.dart';
 import 'package:lapor_mbak_ita/data/model/login_model.dart';
 import 'package:lapor_mbak_ita/pages/berita_page.dart';
 import 'package:lapor_mbak_ita/pages/callCenter_page.dart';
+import 'package:lapor_mbak_ita/pages/profile_page.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
 class Laporan extends StatelessWidget {
   final Report dreport;
 
-  Laporan({required this.dreport});
+  final User dataUser;
+
+  const Laporan({super.key, required this.dataUser, required this.dreport});
 
   @override
   Widget build(BuildContext context) {
@@ -255,25 +258,7 @@ class Laporan extends StatelessWidget {
                 ),
               ),
             )
-            //   body: Padding(
-            //   padding: const EdgeInsets.all(16.0),
-            //   child: Column(
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     children: [
-            //       Image.memory(base64Decode(report.image)),
-            //       SizedBox(height: 16),
-            //       Text(
-            //         report.title,
-            //         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            //       ),
-            //       SizedBox(height: 8),
-            //       Text(report.description),
-            //       SizedBox(height: 16),
-            //       Text('Location: ${report.location}'),
-            //     ],
-            //   ),
-            // ),
-            ),
+             ),
         bottomNavigationBar: Container(
             padding: EdgeInsets.all(5),
             decoration: BoxDecoration(
@@ -302,8 +287,8 @@ class Laporan extends StatelessWidget {
                     color: darkColor,
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) => Berita())));
-                    },
+                        MaterialPageRoute(builder: ((context) => Berita(dataUser: dataUser,))));
+                         },
                   ),
                   label: 'Berita',
                 ),
@@ -314,9 +299,8 @@ class Laporan extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: ((context) => CallCenter())));
-                    },
+                          MaterialPageRoute( builder: ((context) => CallCenter(dataUser: dataUser,))));
+                           },
                   ),
                   label: 'Call Center',
                 ),
@@ -326,8 +310,8 @@ class Laporan extends StatelessWidget {
                     color: darkColor,
                     onPressed: () {
                       //error
-                      //  Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
-                    },
+                       Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile(dataUser: dataUser,))));
+                        },
                   ),
                   label: 'Profile',
                 ),

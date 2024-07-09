@@ -27,27 +27,7 @@ class _LoginState extends State<Login> {
     _passwordController.dispose();
   }
 
-  // Future<void> loginUser() async {
-  //   final response = await http.post(
-  //     Uri.parse('http://192.168.1.12/flutter_auth/login.php'),
-  //     body: {
-  //       'email': _emailController.text,
-  //       'password': _passwordController.text,
-  //     },
-  //   );
-
-  //   final responseBody = jsonDecode(response.body);
-
-  //   if (responseBody['message'] == 'Login successful') {
-  //     // Login successful
-  //     Navigator.pushReplacementNamed(context, '/beranda');
-  //   } else {
-  //     // Handle login error
-  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(responseBody['message'])));
-  //   }
-  // }
-
-  void loginUser() {
+   void loginUser() {
     _loginUser =
         ApiService().userLogin(_emailController.text, _passwordController.text);
     _loginUser.then((value) {

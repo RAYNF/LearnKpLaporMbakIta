@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:lapor_mbak_ita/data/model/login_model.dart';
 import 'package:lapor_mbak_ita/pages/profile_page.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
 class DaftarLaporan extends StatelessWidget {
-  const DaftarLaporan({super.key});
+  final User dataUser;
+
+  const DaftarLaporan({super.key, required this.dataUser});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class DaftarLaporan extends StatelessWidget {
                 color: secondaryColor,
                 onPressed: () {
                   //error
-                  // Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
+                  Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile(dataUser: dataUser,))));
                 },
               ),
               actions: [

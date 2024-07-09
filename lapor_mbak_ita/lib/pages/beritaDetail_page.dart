@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lapor_mbak_ita/data/model/get_news_model.dart';
+import 'package:lapor_mbak_ita/data/model/login_model.dart';
 import 'package:lapor_mbak_ita/pages/beranda_page.dart';
 import 'package:lapor_mbak_ita/pages/berita_page.dart';
 import 'package:lapor_mbak_ita/pages/callCenter_page.dart';
@@ -6,7 +8,10 @@ import 'package:lapor_mbak_ita/pages/profile_page.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
 class BeritaDetail extends StatelessWidget {
-  const BeritaDetail({super.key});
+  final News dreport;
+  final User dataUser;
+
+  const BeritaDetail({super.key, required this.dataUser, required this.dreport});
 
   @override
   Widget build(BuildContext context) {
@@ -24,123 +29,283 @@ class BeritaDetail extends StatelessWidget {
                 icon: Icon(Icons.arrow_back),
                 color: secondaryColor,
                 onPressed: () {
-                  Navigator.push(context,MaterialPageRoute(builder: ((context) => Berita())));
+                  Navigator.pop(context);
                 },
               ),
               actions: [
                 Container(
-                  height: 65, width: 75,
+                  height: 65,
+                  width: 75,
                   padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                  child: Image.asset('assets/Logo.png', fit: BoxFit.fill,),
+                  child: Image.asset(
+                    'assets/Logo.png',
+                    fit: BoxFit.fill,
+                  ),
                 ),
-              ]
-            )
+              ],
+            ),
           ];
         },
-        body: Center(
+        body: SafeArea(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
-            child: Padding(
-              padding: EdgeInsets.all(15),
+            child: Container(
+              width: MediaQuery.of(context).size.width - 2 * defaultMargin,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 25,),
-                  Text("Lorem Ipsum is simply dummy text of the printing and  typesetting", 
-                  style: primaryTextStyle.copyWith(
-                    fontSize: 20,
-                    fontWeight: bold
-                  ),
-                  textAlign: TextAlign.center,),
-                  SizedBox(height: 20,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Rabu, 14 Mei 2024", style: primaryTextStyle.copyWith(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500
-                      ),),
-                      SizedBox(width: 15,),
-                      Text("20:00 WIB", style: primaryTextStyle.copyWith(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500
-                      ),),
-                    ],
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width - 2 * defaultMargin,
-                    height: 220,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade400,
-                      borderRadius: BorderRadius.circular(15),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Image.asset(
+                              'assets/profil.png',
+                              height: 40,
+                              width: 40,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              "Username",
+                              style: primaryTextStyle.copyWith(
+                                  fontSize: 14, fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          dreport.createdAt.toString(),
+                          style: primaryTextStyle.copyWith(
+                              fontSize: 12, fontWeight: FontWeight.w500),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 15,),
-                  Text("Lorem Ipsum is simply dummy text of the printing and  typesetting industry. Lorem Ipsum has been the industry's standard dummy  text ever since the 1500s, when an unknown printer took a galley of  type and scrambled it to make a type specimen book. It has survived not  only five centuries, but also the leap into electronic typesetting,  remaining essentially unchanged. It was popularised in the 1960s with  the release of Letraset sheets containing Lorem Ipsum passages, and more  recently with desktop publishing software like Aldus PageMaker  including versions of Lorem Ipsum.", 
-                  style: primaryTextStyle.copyWith(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500
+                  SizedBox(height: 15),
+                  Padding(
+                    padding: EdgeInsets.all(15),
+                    child: Text(
+                      dreport.title,
+                      style: primaryTextStyle.copyWith(fontWeight: bold),
+                      textAlign: TextAlign.left,
+                    ),
                   ),
-                  textAlign: TextAlign.justify,),
-                  SizedBox(height: 20,),
-                  Text("It is a long established fact that a reader will be distracted by the  readable content of a page when looking at its layout. The point of  using Lorem Ipsum is that it has a more-or-less normal distribution of  letters, as opposed to using 'Content here, content here', making it  look like readable English. Many desktop publishing packages and web  page editors now use Lorem Ipsum as their default model text, and a  search for 'lorem ipsum' will uncover many web sites still in their  infancy. Various versions have evolved over the years, sometimes by  accident, sometimes on purpose (injected humour and the like).", 
-                  style: primaryTextStyle.copyWith(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
+                    child: Text(
+                      dreport.description,
+                      textAlign: TextAlign.justify,
+                    ),
                   ),
-                  textAlign: TextAlign.justify,),
-                  SizedBox(height: 20,),
-                  Text("Lorem Ipsum is simply dummy text of the printing and  typesetting industry. Lorem Ipsum has been the industry's standard dummy  text ever since the 1500s, when an unknown printer took a galley of  type and scrambled it to make a type specimen book. It has survived not  only five centuries, but also the leap into electronic typesetting,  remaining essentially unchanged. It was popularised in the 1960s with  the release of Letraset sheets containing Lorem Ipsum passages, and more  recently with desktop publishing software like Aldus PageMaker  including versions of Lorem Ipsum.", 
-                  style: primaryTextStyle.copyWith(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500
+                  SizedBox(height: 5),
+                  Padding(
+                    padding: EdgeInsets.all(15),
+                    child: Text(
+                      "Lokasi",
+                      style: primaryTextStyle.copyWith(
+                        fontWeight: bold,
+                        fontSize: 16,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
                   ),
-                  textAlign: TextAlign.justify,),
-                  SizedBox(height: 20,),
-                  Text("It is a long established fact that a reader will be distracted by the  readable content of a page when looking at its layout. The point of  using Lorem Ipsum is that it has a more-or-less normal distribution of  letters, as opposed to using 'Content here, content here', making it  look like readable English. Many desktop publishing packages and web  page editors now use Lorem Ipsum as their default model text, and a  search for 'lorem ipsum' will uncover many web sites still in their  infancy. Various versions have evolved over the years, sometimes by  accident, sometimes on purpose (injected humour and the like).", 
-                  style: primaryTextStyle.copyWith(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
+                    child: Text(
+                      dreport.location,
+                      textAlign: TextAlign.justify,
+                    ),
                   ),
-                  textAlign: TextAlign.justify,),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Container(
+                      height: 40,
+                      width: 240,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/gmaps.jpeg',
+                              height: 20,
+                            ),
+                            SizedBox(width: 12),
+                            Text(
+                              'Lihat di Google Maps',
+                              style: primaryTextStyle.copyWith(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: darkColor),
+                            ),
+                          ],
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: secondaryColor,
+                          side: BorderSide(width: 1, color: mutedColor),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width - 2 * defaultMargin,
+                      height: 220,
+                      decoration: BoxDecoration(
+                        color: mutedColor,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.network(
+                          dreport.image,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              'assets/icon.png',
+                              height: 30,
+                              width: 30,
+                              color: darkColor,
+                            ),
+                            SizedBox(width: 5),
+                            Text(
+                              "2",
+                              style: primaryTextStyle.copyWith(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: mutedColor,
+                              ),
+                            ),
+                            SizedBox(width: 5),
+                            Image.asset(
+                              'assets/komen.png',
+                              height: 40,
+                              width: 40,
+                              color: darkColor,
+                            ),
+                            SizedBox(width: 5),
+                            Image.asset(
+                              'assets/share.png',
+                              height: 30,
+                              width: 30,
+                            ),
+                          ],
+                        ),
+                        Container(
+                          height: 30,
+                          width: 105,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Selesai',
+                              style: primaryTextStyle.copyWith(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: darkColor),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: selesaiColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
           ),
         ),
       ),
-       bottomNavigationBar: Container(
+      bottomNavigationBar: Container(
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
           border: Border(
-            top: BorderSide(color: mutedColor, width: 1.0), // Menambahkan border hanya pada bagian atas
+            top: BorderSide(color: mutedColor, width: 1.0),
           ),
         ),
         child: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: IconButton(icon: Icon(Icons.home), color: darkColor,onPressed: () {
-                //error
-                // Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
-              },),
+              icon: IconButton(
+                icon: Icon(Icons.home),
+                color: darkColor,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Beranda(dataUser: dataUser),
+                    ),
+                  );
+                },
+              ),
               label: 'Laporan',
             ),
             BottomNavigationBarItem(
-              icon: IconButton(icon: Icon(Icons.newspaper), color: darkColor,onPressed: () {
-                Navigator.push(context,MaterialPageRoute(builder: ((context) => Berita())));
-              },),
+              icon: IconButton(
+                icon: Icon(Icons.newspaper),
+                color: darkColor,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Berita(dataUser: dataUser),
+                    ),
+                  );
+                },
+              ),
               label: 'Berita',
             ),
             BottomNavigationBarItem(
-              icon: IconButton(icon: Icon(Icons.call), color: darkColor,onPressed: () {
-                Navigator.push(context,MaterialPageRoute(builder: ((context) => CallCenter())));
-              },),
+              icon: IconButton(
+                icon: Icon(Icons.call),
+                color: darkColor,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CallCenter(dataUser: dataUser),
+                    ),
+                  );
+                },
+              ),
               label: 'Call Center',
             ),
             BottomNavigationBarItem(
-              icon: IconButton(icon: Icon(Icons.person), color: darkColor,onPressed: () {
-                //error
-                //  Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
-              },),
+              icon: IconButton(
+                icon: Icon(Icons.person),
+                color: darkColor,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Profile(dataUser: dataUser),
+                    ),
+                  );
+                },
+              ),
               label: 'Profile',
             ),
           ],
@@ -148,8 +313,8 @@ class BeritaDetail extends StatelessWidget {
           backgroundColor: secondaryColor,
           elevation: 0,
           type: BottomNavigationBarType.fixed,
-        )
-       )
+        ),
+      ),
     );
   }
 }

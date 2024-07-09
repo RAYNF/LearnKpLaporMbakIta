@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lapor_mbak_ita/data/model/login_model.dart';
 import 'package:lapor_mbak_ita/pages/profile_page.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
 class EditProfile extends StatelessWidget {
-  const EditProfile({super.key});
+  final User dataUser;
+  const EditProfile({super.key, required this.dataUser});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,10 @@ class EditProfile extends StatelessWidget {
                                     TextButton(
                                       onPressed: () {
                                         // Mengirimkan nilai 'true' ke fungsi penanganan
-                                        Navigator.of(context).pop(true);
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: ((context) => Profile(dataUser: dataUser,))));
                                       },
                                       child: Text('Ya', style: primaryTextStyle.copyWith(
                                         fontSize: 12,

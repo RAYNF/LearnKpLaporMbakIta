@@ -33,28 +33,6 @@ class _RegisterState extends State<Register> {
     _confirmPasswordController.dispose();
   }
 
-  // Future<void> registerUser() async {
-  //   final response = await http.post(
-  //     Uri.parse('http://192.168.1.12/flutter_auth/register.php'),
-  //     body: {
-  //       'username': _usernameController.text,
-  //       'email': _emailController.text,
-  //       'phone': _phoneController.text,
-  //       'password': _passwordController.text,
-  //       'confirm_password': _confirmPasswordController.text,
-  //     },
-  //   );
-
-  //   final responseBody = jsonDecode(response.body);
-
-  //   if (responseBody['status'] == 'success') {
-  //     Navigator.pushReplacementNamed(context, '/login');
-  //   } else {
-  //     ScaffoldMessenger.of(context)
-  //         .showSnackBar(SnackBar(content: Text(responseBody['message'])));
-  //   }
-  // }
-
   void registerUser() {
     _registeruser = ApiService().userRegister(
         _usernameController.text,

@@ -77,7 +77,7 @@ class Profile extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: ((context) => DaftarLaporan())));
+                                    builder: ((context) => DaftarLaporan(dataUser: dataUser,))));
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -109,7 +109,7 @@ class Profile extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: ((context) => EditProfile())));
+                                    builder: ((context) => EditProfile(dataUser: dataUser,))));
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -315,7 +315,7 @@ class Profile extends StatelessWidget {
                     color: darkColor,
                     onPressed: () {
                       //error
-                      // Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
+                      Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda(dataUser: dataUser,))));
                     },
                   ),
                   label: 'Laporan',
@@ -326,7 +326,7 @@ class Profile extends StatelessWidget {
                     color: darkColor,
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) => Berita())));
+                          MaterialPageRoute(builder: ((context) => Berita(dataUser: dataUser,))));
                     },
                   ),
                   label: 'Berita',
@@ -339,7 +339,7 @@ class Profile extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: ((context) => CallCenter())));
+                              builder: ((context) => CallCenter(dataUser: dataUser,))));
                     },
                   ),
                   label: 'Call Center',

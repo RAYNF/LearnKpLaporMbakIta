@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:lapor_mbak_ita/data/model/get_report_model.dart';
+import 'package:lapor_mbak_ita/data/model/get_news_model.dart';
+import 'package:lapor_mbak_ita/data/model/get_news_model.dart';
 import 'package:lapor_mbak_ita/data/model/login_model.dart';
-import 'package:lapor_mbak_ita/pages/laporanDetail_page.dart';
+import 'package:lapor_mbak_ita/pages/beritaDetail_page.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
-class ReportWidget extends StatefulWidget {
-  final Report report;
-
+class NewsWidget extends StatefulWidget {
+  final News news;
   final User dataUser;
 
-  const ReportWidget({super.key, required this.report, required this.dataUser});
+
+  const NewsWidget({super.key, required this.news, required this.dataUser,});
 
   @override
-  State<ReportWidget> createState() => _ReportWidgetState();
+  State<NewsWidget> createState() => _NewsWidgetState();
 }
 
-class _ReportWidgetState extends State<ReportWidget> {
+class _NewsWidgetState extends State<NewsWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Laporan(dreport: widget.report, dataUser: widget.dataUser, );
+          return BeritaDetail(dreport: widget.news, dataUser: widget.dataUser,); // Pastikan nama properti benar
         }));
       },
       child: Container(
@@ -51,7 +52,7 @@ class _ReportWidgetState extends State<ReportWidget> {
                   ],
                 ),
                 Text(
-                  widget.report.createdAt.toString(),
+                  widget.news.createdAt.toString(),
                   style: primaryTextStyle.copyWith(
                       fontSize: 12, fontWeight: FontWeight.w500),
                 )
@@ -60,7 +61,7 @@ class _ReportWidgetState extends State<ReportWidget> {
             Padding(
               padding: EdgeInsets.all(15),
               child: Text(
-                widget.report.description,
+                widget.news.description,
                 textAlign: TextAlign.justify,
               ),
             ),
@@ -74,7 +75,7 @@ class _ReportWidgetState extends State<ReportWidget> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Image.network(
-                    widget.report.image,
+                    widget.news.image,
                     fit: BoxFit.cover,
                   ),
                 )),

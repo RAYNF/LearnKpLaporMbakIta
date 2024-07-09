@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:lapor_mbak_ita/data/model/login_model.dart';
 import 'package:lapor_mbak_ita/pages/beranda_page.dart';
 import 'package:lapor_mbak_ita/pages/berita_page.dart';
 import 'package:lapor_mbak_ita/pages/profile_page.dart';
 import 'package:lapor_mbak_ita/shared/theme_shared.dart';
 
 class CallCenter extends StatelessWidget {
-  const CallCenter({super.key});
+  final User dataUser;
+
+  const CallCenter({super.key, required this.dataUser});
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +103,7 @@ class CallCenter extends StatelessWidget {
                                   children: [
                                     Text("Jl. Pemuda No. 148, Sekayu,\n Kec. Semarang Tengah, Kota\n Semarang, Jawa Tengah\n 50132", 
                                     style: primaryTextStyle.copyWith(
-                                      fontSize: 12,
+                                      fontSize: 10,
                                       fontWeight: FontWeight.w500
                                     ),
                                     textAlign: TextAlign.justify,),
@@ -184,7 +187,7 @@ class CallCenter extends StatelessWidget {
                                   children: [
                                     Text("Jl. Pemuda No. 148, Sekayu,\n Kec. Semarang Tengah, Kota\n Semarang, Jawa Tengah\n 50132", 
                                     style: primaryTextStyle.copyWith(
-                                      fontSize: 12,
+                                      fontSize: 10,
                                       fontWeight: FontWeight.w500
                                     ),
                                     textAlign: TextAlign.justify,),
@@ -268,7 +271,7 @@ class CallCenter extends StatelessWidget {
                                   children: [
                                     Text("Jl. Pemuda No. 148, Sekayu,\n Kec. Semarang Tengah, Kota\n Semarang, Jawa Tengah\n 50132", 
                                     style: primaryTextStyle.copyWith(
-                                      fontSize: 12,
+                                      fontSize: 10,
                                       fontWeight: FontWeight.w500
                                     ),
                                     textAlign: TextAlign.justify,),
@@ -352,7 +355,7 @@ class CallCenter extends StatelessWidget {
                                   children: [
                                     Text("Jl. Pemuda No. 148, Sekayu,\n Kec. Semarang Tengah, Kota\n Semarang, Jawa Tengah\n 50132", 
                                     style: primaryTextStyle.copyWith(
-                                      fontSize: 12,
+                                      fontSize: 10,
                                       fontWeight: FontWeight.w500
                                     ),
                                     textAlign: TextAlign.justify,),
@@ -436,7 +439,7 @@ class CallCenter extends StatelessWidget {
                                   children: [
                                     Text("Jl. Pemuda No. 148, Sekayu,\n Kec. Semarang Tengah, Kota\n Semarang, Jawa Tengah\n 50132", 
                                     style: primaryTextStyle.copyWith(
-                                      fontSize: 12,
+                                      fontSize: 10,
                                       fontWeight: FontWeight.w500
                                     ),
                                     textAlign: TextAlign.justify,),
@@ -520,7 +523,7 @@ class CallCenter extends StatelessWidget {
                                   children: [
                                     Text("Jl. Pemuda No. 148, Sekayu,\n Kec. Semarang Tengah, Kota\n Semarang, Jawa Tengah\n 50132", 
                                     style: primaryTextStyle.copyWith(
-                                      fontSize: 12,
+                                      fontSize: 10,
                                       fontWeight: FontWeight.w500
                                     ),
                                     textAlign: TextAlign.justify,),
@@ -556,14 +559,13 @@ class CallCenter extends StatelessWidget {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.home), color: darkColor,onPressed: () {
-                //error
-                // Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
-              },),
+                Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda(dataUser: dataUser,))));
+                },),
               label: 'Laporan',
             ),
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.newspaper), color: darkColor,onPressed: () {
-                Navigator.push(context,MaterialPageRoute(builder: ((context) => Berita())));
+                Navigator.push(context,MaterialPageRoute(builder: ((context) => Berita(dataUser: dataUser,))));
               },),
               label: 'Berita',
             ),
@@ -575,9 +577,8 @@ class CallCenter extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: IconButton(icon: Icon(Icons.person), color: darkColor,onPressed: () {
-                //error
-                //  Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile())));
-              },),
+                 Navigator.push(context,MaterialPageRoute(builder: ((context) => Profile(dataUser: dataUser,))));
+                  },),
               label: 'Profile',
             ),
           ],
