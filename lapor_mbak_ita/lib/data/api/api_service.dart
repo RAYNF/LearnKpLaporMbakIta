@@ -1,3 +1,5 @@
+import 'package:lapor_mbak_ita/data/model/add_report_model.dart';
+import 'package:lapor_mbak_ita/data/model/get_report_model.dart';
 import 'package:lapor_mbak_ita/data/model/login_model.dart';
 import 'package:lapor_mbak_ita/data/model/register_model.dart';
 import 'package:lapor_mbak_ita/data/model/user_model.dart';
@@ -9,6 +11,8 @@ class ApiService {
       "http://192.168.100.11/belajar/LearnKpLaporMbakIta/lapor_mbak_ita/lib/data/database/";
   static const String _register = "register.php";
   static const String _login = "login.php";
+  static const String _addReport = "add_report.php";
+  static const String _getReport = "get_reports.php";
 
   Future<RegisterResponseModel> userRegister(String username, String email,
       String phone, String password, String confirm_password) async {
@@ -35,6 +39,31 @@ class ApiService {
       return LoginResponseModel.fromJson(json.decode(response.body));
     } else {
       throw Exception("gagal login");
+    }
+  }
+
+  Future<AddReportModel> addReport(String title, String description,
+      String ketLocation, String image) async {
+    final response = await http.post(Uri.parse("$_baseUrl$_addReport"), body: {
+      "title": title,
+      "description": description,
+      "location": ketLocation,
+      "image": image
+    });
+
+    if (response.statusCode == 200) {
+      return AddReportModel.fromJson(json.decode(response.body));
+    } else {
+      throw Exception("gagal add report");
+    }
+  }
+
+  Future<GetReportModel> getReportAll() async {
+    final response = await http.post(Uri.parse("$_baseUrl$_getReport"));
+    if (response.statusCode == 200) {
+      return GetReportModel.fromJson(json.decode(response.body));
+    } else {
+      throw Exception("gagal ambil berita");
     }
   }
 }
