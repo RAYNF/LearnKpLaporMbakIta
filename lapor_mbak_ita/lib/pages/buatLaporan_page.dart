@@ -22,7 +22,6 @@ class BuatLaporan extends StatefulWidget {
 }
 
 class _BuatLaporanState extends State<BuatLaporan> {
- 
   final TextEditingController _judul = TextEditingController();
   final TextEditingController _deskripsi = TextEditingController();
   final TextEditingController _lokasiLongtitude = TextEditingController();
@@ -44,8 +43,12 @@ class _BuatLaporanState extends State<BuatLaporan> {
   }
 
   void _submitReport() {
+    String defaultUrlImage =
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTihlt0tHfJOvJOLP9re8A_h5g54AhYvuQInNXUE5TBe8GNcK3xljM5IJqxqe0qKBL16Bw&usqp=CAU";
+    String urlImage =
+        _urlImage.text.isNotEmpty ? _urlImage.text : defaultUrlImage;
     _addReport = ApiService().addReport(
-        _judul.text, _deskripsi.text, _keteranganLokasi.text, _urlImage.text);
+        _judul.text, _deskripsi.text, _keteranganLokasi.text, urlImage);
     _addReport.then((value) {
       addReportModel = value;
       if (addReportModel.status == "success") {
@@ -109,6 +112,15 @@ class _BuatLaporanState extends State<BuatLaporan> {
         },
       );
     });
+  }
+
+  void _resetField() {
+    _judul.clear();
+    _deskripsi.clear();
+    _lokasiLongtitude.clear();
+    _lokasiLatitude.clear();
+    _urlImage.clear();
+    _keteranganLokasi.clear();
   }
 
   @override
@@ -213,7 +225,6 @@ class _BuatLaporanState extends State<BuatLaporan> {
               ])
         ];
       },
-     
       body: SafeArea(
         child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -222,7 +233,6 @@ class _BuatLaporanState extends State<BuatLaporan> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                 
                   Text(
                     "UrlGambar",
                     style: primaryTextStyle.copyWith(
@@ -233,7 +243,6 @@ class _BuatLaporanState extends State<BuatLaporan> {
                         InputDecoration(labelText: 'url gambar'),
                     controller: _urlImage,
                   ),
-
                   SizedBox(
                     height: 30,
                   ),
@@ -263,7 +272,6 @@ class _BuatLaporanState extends State<BuatLaporan> {
                   SizedBox(
                     height: 30,
                   ),
-
                   SizedBox(
                     height: 30,
                   ),
@@ -316,7 +324,9 @@ class _BuatLaporanState extends State<BuatLaporan> {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: secondaryColor,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                _resetField();
+                              },
                               child: Text(
                                 'Reset',
                                 style: primaryTextStyle.copyWith(

@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 
 class ApiService {
   static const String _baseUrl =
-      "http://192.168.1.10/belajar/LearnKpLaporMbakIta/lapor_mbak_ita/lib/data/database/";
+      "http://192.168.100.11/belajar/LearnKpLaporMbakIta/lapor_mbak_ita/lib/data/database/";
   static const String _register = "register.php";
   static const String _login = "login.php";
   static const String _addReport = "add_report.php";
@@ -91,6 +91,16 @@ class ApiService {
     final response = await http.post(Uri.parse("$_baseUrl$_getNews"));
     if (response.statusCode == 200) {
       return GetNewsModel.fromJson(json.decode(response.body));
+    } else {
+      throw Exception("gagal ambil berita");
+    }
+  }
+
+  Future<GetReportModel> getReportSort(String status) async {
+    final response = await http
+        .post(Uri.parse("$_baseUrl$_getReport"), body: {"status": status});
+    if (response.statusCode == 200) {
+      return GetReportModel.fromJson(json.decode(response.body));
     } else {
       throw Exception("gagal ambil berita");
     }

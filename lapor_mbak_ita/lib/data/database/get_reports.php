@@ -12,7 +12,7 @@ $query = "SELECT * FROM reports";
 
 // Tambahkan filter berdasarkan status
 if ($status != 'all') {
-    $query .= " WHERE status = '$status'";
+    $query .= "SELECT * FROM reports WHERE status = '$status'";
 }
 
 // Tambahkan filter berdasarkan urutan

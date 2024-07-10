@@ -25,9 +25,10 @@ class Beranda extends StatefulWidget {
 }
 
 class _BerandaState extends State<Beranda> {
-
   late Future<GetReportModel> _getReport;
   late GetReportModel getReportModel;
+  String urutkan = "latest";
+  String status = "all";
 
   @override
   void initState() {
@@ -38,6 +39,14 @@ class _BerandaState extends State<Beranda> {
       setState(() {});
     });
   }
+
+//blm bisa
+  // _sortReport(String status){
+  //   _getReport = ApiService().getReportSort(status);
+  //   _getReport.then((value){
+  //     getReportModel = value;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -108,6 +117,7 @@ class _BerandaState extends State<Beranda> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
+                                                    //filter
                                                     SizedBox(
                                                       height: 25,
                                                     ),
@@ -166,8 +176,7 @@ class _BerandaState extends State<Beranda> {
                                                                 minimumSize:
                                                                     MaterialStateProperty.all<
                                                                             Size>(
-                                                                        Size(
-                                                                            90,
+                                                                        Size(90,
                                                                             40)),
                                                                 shape: MaterialStateProperty.all<
                                                                     RoundedRectangleBorder>(
@@ -206,8 +215,7 @@ class _BerandaState extends State<Beranda> {
                                                                 minimumSize:
                                                                     MaterialStateProperty.all<
                                                                             Size>(
-                                                                        Size(
-                                                                            90,
+                                                                        Size(90,
                                                                             40)),
                                                                 shape: MaterialStateProperty.all<
                                                                     RoundedRectangleBorder>(
@@ -246,8 +254,7 @@ class _BerandaState extends State<Beranda> {
                                                                 minimumSize:
                                                                     MaterialStateProperty.all<
                                                                             Size>(
-                                                                        Size(
-                                                                            90,
+                                                                        Size(90,
                                                                             40)),
                                                                 shape: MaterialStateProperty.all<
                                                                     RoundedRectangleBorder>(
@@ -309,8 +316,7 @@ class _BerandaState extends State<Beranda> {
                                                                 minimumSize:
                                                                     MaterialStateProperty.all<
                                                                             Size>(
-                                                                        Size(
-                                                                            90,
+                                                                        Size(90,
                                                                             40)),
                                                                 shape: MaterialStateProperty.all<
                                                                     RoundedRectangleBorder>(
@@ -349,8 +355,7 @@ class _BerandaState extends State<Beranda> {
                                                                 minimumSize:
                                                                     MaterialStateProperty.all<
                                                                             Size>(
-                                                                        Size(
-                                                                            90,
+                                                                        Size(90,
                                                                             40)),
                                                                 shape: MaterialStateProperty.all<
                                                                     RoundedRectangleBorder>(
@@ -373,7 +378,14 @@ class _BerandaState extends State<Beranda> {
                                                                           darkColor,
                                                                       width: 1),
                                                                 )),
-                                                            onPressed: () {},
+                                                            onPressed: () {
+                                                              setState(
+                                                                () {
+                                                                  status =
+                                                                      "diproses";
+                                                                },
+                                                              );
+                                                            },
                                                             child: Text(
                                                               "Diproses",
                                                               style: TextStyle(
@@ -389,8 +401,7 @@ class _BerandaState extends State<Beranda> {
                                                                 minimumSize:
                                                                     MaterialStateProperty.all<
                                                                             Size>(
-                                                                        Size(
-                                                                            90,
+                                                                        Size(90,
                                                                             40)),
                                                                 shape: MaterialStateProperty.all<
                                                                     RoundedRectangleBorder>(
@@ -462,7 +473,11 @@ class _BerandaState extends State<Beranda> {
                                                                           mutedColor,
                                                                       width: 1),
                                                                 )),
-                                                            onPressed: () {},
+                                                            onPressed: () {
+                                                              //blm bisa
+                                                              // _sortReport(status);
+                                                              print(status);
+                                                            },
                                                             child: Text(
                                                               "Terapkan",
                                                               style: TextStyle(
@@ -519,7 +534,7 @@ class _BerandaState extends State<Beranda> {
                 height: MediaQuery.of(context).size.height,
                 child: Column(
                   children: [
-                   Container(
+                    Container(
                       height: MediaQuery.of(context).size.height,
                       width: double.infinity,
                       child: FutureBuilder<GetReportModel>(
@@ -537,7 +552,10 @@ class _BerandaState extends State<Beranda> {
                                 itemCount: snapshot.data?.report.length,
                                 itemBuilder: (context, index) {
                                   var report = snapshot.data!.report[index];
-                                  return ReportWidget(report: report, dataUser: widget.dataUser,);
+                                  return ReportWidget(
+                                    report: report,
+                                    dataUser: widget.dataUser,
+                                  );
                                 },
                               );
                             } else if (snapshot.hasError) {
@@ -559,7 +577,7 @@ class _BerandaState extends State<Beranda> {
                 ),
               ),
             ),
-            ),
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -605,8 +623,12 @@ class _BerandaState extends State<Beranda> {
                     icon: Icon(Icons.newspaper),
                     color: darkColor,
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) => Berita(dataUser: widget.dataUser,))));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => Berita(
+                                    dataUser: widget.dataUser,
+                                  ))));
                     },
                   ),
                   label: 'Berita',
@@ -619,7 +641,9 @@ class _BerandaState extends State<Beranda> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: ((context) => CallCenter(dataUser: widget.dataUser,))));
+                              builder: ((context) => CallCenter(
+                                    dataUser: widget.dataUser,
+                                  ))));
                     },
                   ),
                   label: 'Call Center',
