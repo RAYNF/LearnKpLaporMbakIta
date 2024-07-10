@@ -29,7 +29,7 @@ $result = mysqli_query($conn, $query);
 
 $news = array();
 while($row = mysqli_fetch_assoc($result)) {
-    $newss[] = $row;
+    $news[] = $row;
 }
 
 $response = array("success" => true, "message" => "berita berhasil.", "report" => $news);
