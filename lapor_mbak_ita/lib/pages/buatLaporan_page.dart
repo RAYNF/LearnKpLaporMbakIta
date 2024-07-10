@@ -154,7 +154,7 @@ class _BuatLaporanState extends State<BuatLaporan> {
                               TextButton(
                                 onPressed: () {
                                   // Mengirimkan nilai 'true' ke fungsi penanganan
-                                  Navigator.of(context).pop(true);
+                                  Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda(dataUser: widget.dataUser,))));
                                 },
                                 child: Text(
                                   'Ya',

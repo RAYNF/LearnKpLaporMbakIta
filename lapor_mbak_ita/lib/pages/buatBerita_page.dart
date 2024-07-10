@@ -153,7 +153,7 @@ class _BuatBeritaState extends State<BuatBerita> {
                               TextButton(
                                 onPressed: () {
                                   // Mengirimkan nilai 'true' ke fungsi penanganan
-                                  Navigator.of(context).pop(true);
+                                  Navigator.push(context,MaterialPageRoute(builder: (context) => Berita(dataUser: widget.dataUser),));
                                 },
                                 child: Text(
                                   'Ya',

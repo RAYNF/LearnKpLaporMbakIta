@@ -15,8 +15,8 @@ class ApiService {
   static const String _login = "login.php";
   static const String _addReport = "add_report.php";
   static const String _getReport = "get_reports.php";
-  static const String _addNews = "add_report.php";
-  static const String _getNews = "get_reports.php";
+  static const String _addNews = "add_news.php";
+  static const String _getNews = "get_news.php";
 
   Future<RegisterResponseModel> userRegister(String username, String email,
       String phone, String password, String confirm_password) async {
@@ -62,7 +62,7 @@ class ApiService {
     }
   }
 
-  Future<GetReportModel> getReportAll() async {
+  Future<GetReportModel> getReportAll(String order, String status) async {
     final response = await http.post(Uri.parse("$_baseUrl$_getReport"));
     if (response.statusCode == 200) {
       return GetReportModel.fromJson(json.decode(response.body));
