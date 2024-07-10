@@ -30,18 +30,10 @@ class _BerandaState extends State<Beranda> {
   String urutkan = "latest";
   String status = "all";
 
-  String _order = 'latest';
-  String _status = 'all';
-
   @override
   void initState() {
     super.initState();
-    _fetchReports();
-  }
-
-  void _fetchReports() {
-    _getReport = ApiService().getReportAll(_order, _status);
-    //_getReport = ApiService().getFilteredReport(_order, _status, null,null);
+    _getReport = ApiService().getReportAll();
     _getReport.then((value) {
       getReportModel = value;
       setState(() {});
@@ -63,97 +55,122 @@ class _BerandaState extends State<Beranda> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                floating: true,pinned: true,snap: true,backgroundColor: primaryColor,toolbarHeight: 75,
+                floating: true,
+                pinned: true,
+                snap: true,
+                backgroundColor: primaryColor,
+                toolbarHeight: 75,
                 actions: [
                   Container(
-                    height: 65,width: 75,padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                    child: Image.asset('assets/Logo.png',fit: BoxFit.fill)),
-                  SizedBox(height: 15),
+                    height: 65,
+                    width: 75,
+                    padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                    child: Image.asset(
+                      'assets/Logo.png',
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      SizedBox(height: 15),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.all(15),height: 60,width: 120,
+                        padding: EdgeInsets.all(15),
+                        height: 60,
+                        width: 120,
                         child: ElevatedButton(
                           onPressed: () {
                             showModalBottomSheet(
-                                isScrollControlled: true, context: context, builder: (context) {
-                                  return StatefulBuilder(builder: (BuildContext context, StateSetter setState) { return Wrap(
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (context) {
+                                  return StatefulBuilder(builder:
+                                      (BuildContext context,
+                                          StateSetter setState) {
+                                    return Wrap(
                                       children: [
                                         Container(
                                           color: Colors.transparent,
-                                          child: Container(decoration: BoxDecoration(border: Border.all(color: darkColor, width: 3),
-                                                color: secondaryColor, borderRadius: BorderRadius.only(topLeft: Radius.circular(28), topRight: Radius.circular(28))),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: darkColor, width: 3),
+                                                color: secondaryColor,
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(28),
+                                                  topRight: Radius.circular(28),
+                                                )),
                                             child: Container(
-                                              margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                                              margin: EdgeInsets.symmetric(
+                                                  horizontal: defaultMargin),
                                               child: Container(
-                                                width: MediaQuery.of(context).size.width -2 * defaultMargin,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    2 * defaultMargin,
                                                 child: Column(
-                                                  crossAxisAlignment:CrossAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
+                                                    //filter
                                                     SizedBox(
                                                       height: 25,
                                                     ),
-                                                    SizedBox(height: 25,),
                                                     Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
-                                                        Text("Filter",style: primaryTextStyle.copyWith(fontSize: 16,fontWeight: FontWeight.bold,color: darkColor)),
-                                                        TextButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          _order = 'latest';
-                                                          _status = 'all';
-                                                        });
-                                                        initState();
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: Text(
-                                                        "Reset",
-                                                        style: primaryTextStyle.copyWith(
-                                                          fontSize: 16,
-                                                          fontWeight: FontWeight.bold,
-                                                          color: mutedColor,
+                                                        Text(
+                                                          "Filter",
+                                                          style:
+                                                              primaryTextStyle
+                                                                  .copyWith(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: darkColor,
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ),
+                                                        Text(
+                                                          "Reset",
+                                                          style: primaryTextStyle
+                                                              .copyWith(
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color:
+                                                                      mutedColor),
+                                                        )
                                                       ],
                                                     ),
-                                                    SizedBox(height: 45),
-                                                    Text("Urutkan",style: primaryTextStyle.copyWith(fontSize: 16,fontWeight:FontWeight.bold,color: darkColor)),
-                                                    SizedBox(height: 15),
+                                                    SizedBox(
+                                                      height: 45,
+                                                    ),
+                                                    Text(
+                                                      "Urutkan",
+                                                      style: primaryTextStyle
+                                                          .copyWith(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: darkColor,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 15,
+                                                    ),
                                                     Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
-                                                        TextButton(style: ButtonStyle(minimumSize:MaterialStateProperty.all<Size>(Size(90,40)),
-                                                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius:BorderRadius.circular(5))),
-                                                                backgroundColor: MaterialStateProperty.all<Color>( Colors.grey.shade200),
-                                                                side: MaterialStateProperty.all<BorderSide>( BorderSide(color:darkColor,width: 1))),
-                                                            onPressed: () {
-                                                              setState(() {
-                                                              _order = 'latest';
-                                                              });
-                                                              initState();
-                                                              Navigator.pop(context);
-                                                            },
-                                                            child: Text("Terbaru",style: TextStyle(color:darkColor,fontSize: 14,fontWeight:FontWeight.w600))),
-                                                        TextButton(
-                                                            style: ButtonStyle(minimumSize:
-                                                                    MaterialStateProperty.all<Size>(Size(90,40)),
-                                                                shape: MaterialStateProperty.all<
-                                                                    RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius:BorderRadius.circular(5))),
-                                                                backgroundColor:
-                                                                    MaterialStateProperty.all<Color>(Colors.grey.shade200),
-                                                                side: MaterialStateProperty.all<BorderSide>(BorderSide(color:darkColor,width: 1))),
-                                                            onPressed: () {
-                                                              setState(() {
-                                                              _order = 'popular';
-                                                              });
-                                                              initState();
-                                                              Navigator.pop(context);
-                                                            },
-                                                            child: Text("Terpopuler",style: TextStyle(color:darkColor,fontSize: 14,fontWeight:FontWeight.w600))),
                                                         TextButton(
                                                             style: ButtonStyle(
                                                                 minimumSize:
@@ -271,18 +288,6 @@ class _BerandaState extends State<Beranda> {
                                                                       FontWeight
                                                                           .w600),
                                                             ))
-                                                                    MaterialStateProperty.all<Size>(Size(90,40)),
-                                                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius:BorderRadius.circular(5))),
-                                                                backgroundColor:MaterialStateProperty.all<Color>(Colors.grey.shade200),
-                                                                side: MaterialStateProperty.all<BorderSide>(BorderSide(color:darkColor,width: 1))),
-                                                            onPressed: () {
-                                                              setState(() {
-                                                              _order = 'nearest';
-                                                              });
-                                                              initState();
-                                                              Navigator.pop(context);
-                                                            },
-                                                            child: Text("Terdekat",style: TextStyle(color:darkColor,fontSize: 14,fontWeight:FontWeight.w600)))
                                                       ],
                                                     ),
                                                     SizedBox(
@@ -469,9 +474,9 @@ class _BerandaState extends State<Beranda> {
                                                                       width: 1),
                                                                 )),
                                                             onPressed: () {
-                                                              initState();
-                                                              Navigator.pop(context);
-
+                                                              //blm bisa
+                                                              // _sortReport(status);
+                                                              print(status);
                                                             },
                                                             child: Text(
                                                               "Terapkan",
@@ -608,7 +613,10 @@ class _BerandaState extends State<Beranda> {
                     icon: Icon(Icons.home),
                     color: darkColor,
                     onPressed: () {
-                      //Navigator.push(context,MaterialPageRoute(builder: ((context) => Beranda())));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return Beranda(dataUser: widget.dataUser);
+                      }));
                     },
                   ),
                   label: 'Laporan',

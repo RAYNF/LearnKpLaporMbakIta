@@ -62,7 +62,7 @@ class ApiService {
     }
   }
 
-  Future<GetReportModel> getReportAll(String order, String status) async {
+  Future<GetReportModel> getReportAll() async {
     final response = await http.post(Uri.parse("$_baseUrl$_getReport"));
     if (response.statusCode == 200) {
       return GetReportModel.fromJson(json.decode(response.body));
@@ -71,14 +71,10 @@ class ApiService {
     }
   }
 
-  Future<AddNewsModel> addNews(String title, String description,
-      String ketLocation, String image) async {
-    final response = await http.post(Uri.parse("$_baseUrl$_addNews"), body: {
-      "title": title,
-      "description": description,
-      "location": ketLocation,
-      "image": image
-    });
+  Future<AddNewsModel> addNews(
+      String title, String description, String image) async {
+    final response = await http.post(Uri.parse("$_baseUrl$_addNews"),
+        body: {"title": title, "description": description, "image": image});
 
     if (response.statusCode == 200) {
       return AddNewsModel.fromJson(json.decode(response.body));

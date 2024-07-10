@@ -114,7 +114,7 @@ class BeritaDetail extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
                     child: Text(
-                      dreport.location,
+                    "  dreport.location",
                       textAlign: TextAlign.justify,
                     ),
                   ),

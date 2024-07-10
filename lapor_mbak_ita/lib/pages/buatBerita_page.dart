@@ -11,7 +11,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
 
-
 class BuatBerita extends StatefulWidget {
   final User dataUser;
 
@@ -24,10 +23,10 @@ class BuatBerita extends StatefulWidget {
 class _BuatBeritaState extends State<BuatBerita> {
   final TextEditingController _judul = TextEditingController();
   final TextEditingController _deskripsi = TextEditingController();
-  final TextEditingController _lokasiLongtitude = TextEditingController();
-  final TextEditingController _lokasiLatitude = TextEditingController();
+  // final TextEditingController _lokasiLongtitude = TextEditingController();
+  // final TextEditingController _lokasiLatitude = TextEditingController();
   final TextEditingController _urlImage = TextEditingController();
-  final TextEditingController _keteranganLokasi = TextEditingController();
+  // final TextEditingController _keteranganLokasi = TextEditingController();
 
   late Future<AddNewsModel> _addNews;
   late AddNewsModel addNewsModel;
@@ -36,15 +35,18 @@ class _BuatBeritaState extends State<BuatBerita> {
     _judul.dispose();
     _deskripsi.dispose();
     _urlImage.dispose();
-    _keteranganLokasi.dispose();
-    _lokasiLatitude.dispose();
-    _lokasiLongtitude.dispose();
+    // _keteranganLokasi.dispose();
+    // _lokasiLatitude.dispose();
+    // _lokasiLongtitude.dispose();
     super.dispose();
   }
 
   void _submitReport() {
-    _addNews = ApiService().addNews(
-        _judul.text, _deskripsi.text, _keteranganLokasi.text, _urlImage.text);
+    String defaultUrlImage =
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTihlt0tHfJOvJOLP9re8A_h5g54AhYvuQInNXUE5TBe8GNcK3xljM5IJqxqe0qKBL16Bw&usqp=CAU";
+    String urlImage =
+        _urlImage.text.isNotEmpty ? _urlImage.text : defaultUrlImage;
+    _addNews = ApiService().addNews(_judul.text, _deskripsi.text, urlImage);
     _addNews.then((value) {
       addNewsModel = value;
       if (addNewsModel.status == "success") {
@@ -153,7 +155,12 @@ class _BuatBeritaState extends State<BuatBerita> {
                               TextButton(
                                 onPressed: () {
                                   // Mengirimkan nilai 'true' ke fungsi penanganan
-                                  Navigator.push(context,MaterialPageRoute(builder: (context) => Berita(dataUser: widget.dataUser),));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            Berita(dataUser: widget.dataUser),
+                                      ));
                                 },
                                 child: Text(
                                   'Ya',
@@ -212,8 +219,7 @@ class _BuatBeritaState extends State<BuatBerita> {
               ])
         ];
       },
- 
- body: SafeArea(
+      body: SafeArea(
         child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Container(
@@ -221,7 +227,6 @@ class _BuatBeritaState extends State<BuatBerita> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  
                   Text(
                     "UrlGambar",
                     style: primaryTextStyle.copyWith(
@@ -232,7 +237,6 @@ class _BuatBeritaState extends State<BuatBerita> {
                         InputDecoration(labelText: 'url gambar'),
                     controller: _urlImage,
                   ),
-
                   SizedBox(
                     height: 30,
                   ),
@@ -262,46 +266,33 @@ class _BuatBeritaState extends State<BuatBerita> {
                   SizedBox(
                     height: 30,
                   ),
-
-                  
                   SizedBox(
                     height: 30,
                   ),
-                  Text(
-                    "Keterangan Lokasi",
-                    style: primaryTextStyle.copyWith(
-                        fontSize: 16, fontWeight: bold),
-                  ),
-                  TextField(
-                    decoration: InputDecoration(labelText: 'detail'),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        width: 20,
-                        height: 20,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade500),
-                          color: secondaryColor,
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text("Laporan Rahasia",
-                          style: primaryTextStyle.copyWith(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: mutedColor))
-                    ],
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
+                  // Row(
+                  //   children: [
+                  //     Container(
+                  //       width: 20,
+                  //       height: 20,
+                  //       decoration: BoxDecoration(
+                  //         border: Border.all(color: Colors.grey.shade500),
+                  //         color: secondaryColor,
+                  //         borderRadius: BorderRadius.circular(50),
+                  //       ),
+                  //     ),
+                  //     SizedBox(
+                  //       width: 10,
+                  //     ),
+                  //     Text("Laporan Rahasia",
+                  //         style: primaryTextStyle.copyWith(
+                  //             fontSize: 12,
+                  //             fontWeight: FontWeight.w500,
+                  //             color: mutedColor))
+                  //   ],
+                  // ),
+                  // SizedBox(
+                  //   height: 5,
+                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
